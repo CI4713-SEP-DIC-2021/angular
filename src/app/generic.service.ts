@@ -8,7 +8,7 @@ export class GenericService {
   constructor(private http: HttpClient) { }
 
   getData() {
-    return  this.http.get('http://localhost:8000/getall').pipe(
+    return  this.http.get('https://ci4713-sep-dic-2021-flask.herokuapp.com/getall').pipe(
       first(), map(data => {
         return data;
       })
