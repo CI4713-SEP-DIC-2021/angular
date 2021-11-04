@@ -11,6 +11,7 @@ declare interface RouteInfo {
 
 // Agregar información de iconos del sidebar con rutas aquí
 export const ROUTES: RouteInfo[] = [
+    { path: '/user-profile', title: 'Perfil de Usuario',  icon:'account', class: '' },
     { path: '/projects', title: 'Portafolio de Proyectos',  icon:'dashboard', class: '' }
 ];
 

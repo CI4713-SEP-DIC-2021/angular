@@ -11,7 +11,6 @@ import { ComponentsModule } from './components/components.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ProjectsModule } from './pages/projects/projects.module';
 import { UserProfileModule } from './pages/user-profile/user-profile.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -28,10 +27,10 @@ import { MatButtonModule } from '@angular/material/button';
 
 // Components
 import { LoginComponent } from './login/login.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { AddProjectComponent } from './projects/dialogs/add-project/add-project.component';
-import { DeleteProjectComponent } from './projects/dialogs/delete-project/delete-project.component';
-import { EditProjectComponent } from './projects/dialogs/edit-project/edit-project.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
+import { AddProjectComponent } from './pages/projects/dialogs/add-project/add-project.component';
+import { DeleteProjectComponent } from './pages/projects/dialogs/delete-project/delete-project.component';
+import { EditProjectComponent } from './pages/projects/dialogs/edit-project/edit-project.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +51,6 @@ import { EditProjectComponent } from './projects/dialogs/edit-project/edit-proje
     RouterModule,
     ComponentsModule,
     FontAwesomeModule,
-    ProjectsModule,
     NgbModule,
     MatToolbarModule,
     MatIconModule,
