@@ -1,8 +1,5 @@
 import { Component, OnInit, } from '@angular/core';
-import { Location } from '@angular/common';
 import 'rxjs/add/operator/filter';
-import { Router } from '@angular/router';
-import PerfectScrollbar from 'perfect-scrollbar';
 
 @Component({
   selector: 'app-dashboard',
