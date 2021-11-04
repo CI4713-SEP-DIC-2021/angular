@@ -13,12 +13,17 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectsModule } from './pages/projects/projects.module';
 
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -30,6 +35,10 @@ import { ProjectsModule } from './pages/projects/projects.module';
     ComponentsModule,
     FontAwesomeModule,
     ProjectsModule,
+    NgbModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
