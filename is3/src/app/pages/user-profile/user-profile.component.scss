@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+table {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 90%;
+}
+
+td {
+  padding: 1rem 0;
+}

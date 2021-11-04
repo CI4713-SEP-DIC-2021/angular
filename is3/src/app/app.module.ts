@@ -12,6 +12,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectsModule } from './pages/projects/projects.module';
+import { UserProfileModule } from './pages/user-profile/user-profile.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -64,7 +65,8 @@ import { EditProjectComponent } from './projects/dialogs/edit-project/edit-proje
     MatDialogModule,
     MatSelectModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    UserProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]
