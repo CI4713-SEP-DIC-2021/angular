@@ -1,25 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { catchError, first, map } from 'rxjs/operators';
-import { GenericService } from './generic.service';
+import { Component} from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  data: any;
+export class AppComponent {
+  constructor(public router: Router){
 
-  constructor(
-    public http: HttpClient,
-    public genericService: GenericService) {}
-
-  ngOnInit(): void {
-    this.genericService.getData().subscribe(data => {
-      this.data = data;
-      console.log(data);
-    });
   }
 }
