@@ -21,16 +21,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
 // Components
-import { LoginComponent } from './login/login.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { AddProjectComponent } from './pages/projects/dialogs/add-project/add-project.component';
 import { DeleteProjectComponent } from './pages/projects/dialogs/delete-project/delete-project.component';
 import { EditProjectComponent } from './pages/projects/dialogs/edit-project/edit-project.component';
+import { LoginComponent, DialogErrorLogin } from './login/login.component';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import { EditProjectComponent } from './pages/projects/dialogs/edit-project/edit
     ProjectsComponent,
     AddProjectComponent,
     DeleteProjectComponent,
-    EditProjectComponent
+    EditProjectComponent,
+    DialogErrorLogin,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -64,9 +65,18 @@ import { EditProjectComponent } from './pages/projects/dialogs/edit-project/edit
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
-    UserProfileModule
+    UserProfileModule,
+    MatDialogModule,
   ],
-  providers: [],
+  entryComponents: [
+  
+  ],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
