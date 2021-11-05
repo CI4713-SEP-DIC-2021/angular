@@ -29,3 +29,13 @@
         color: grey;
     }
 }
+
+.fondo {
+    overflow: hidden;
+    background: url(/assets/img/fondo4.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+}
