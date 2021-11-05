@@ -17,13 +17,30 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+
+// Components
 import { LoginComponent } from './login/login.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { AddProjectComponent } from './projects/dialogs/add-project/add-project.component';
+import { DeleteProjectComponent } from './projects/dialogs/delete-project/delete-project.component';
+import { EditProjectComponent } from './projects/dialogs/edit-project/edit-project.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    ProjectsComponent,
+    AddProjectComponent,
+    DeleteProjectComponent,
+    EditProjectComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -39,6 +56,15 @@ import { LoginComponent } from './login/login.component';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
