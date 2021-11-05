@@ -1,0 +1,70 @@
+.form-description {
+    width: 80%; 
+    display: block; 
+    margin: 0 auto; 
+    margin-top: 30px
+}
+
+.form-select {
+    width: 80%; 
+    display: block; 
+    margin: 0 auto; 
+    margin-top: 20px
+}
+
+.edit-button {
+    //background-color: blueviolet;
+    background-color: #23cf40;
+    color: white;
+    width: 75%;
+    border-radius: 9999px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    transition: width 0.5s;
+}
+
+.edit-button:hover {
+    width: 80%
+}
+
+.edit-button:disabled,
+.edit-button:disabled:hover
+.edit-button[disabled]{
+  background-color: rgba(240, 240, 240, 0.5);
+  color: #666666;
+  width: 75%
+}
+
+.cancel-button {
+    background-color: rgb(240, 240, 240);
+    width: 75%;
+    border-radius: 9999px;
+    margin-top: 40px;
+    transition: width 0.5s;
+}
+
+.cancel-button:hover {
+    background-color: rgb(220, 220, 220);
+    width: 80%
+}
+
+// Changing the color for the mat-form-field
+::ng-deep {
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+       color: grey;
+    }
+    .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+        color: #23cf40;
+    }
+    .mat-form-field-label {
+        color: grey;
+    }
+    .mat-form-field.mat-focused .mat-form-field-label {
+        color: grey;
+    }
+
+    .mat-focused .mat-form-field-ripple {
+        /*Change color of underline when focused*/
+        background-color: grey !important;
+    }
+}

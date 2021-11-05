@@ -1,0 +1,36 @@
+<!-- Edit project dialog -->
+<div style="width: 500px">
+    <h2 mat-dialog-title>Editar Proyecto</h2>
+    <mat-divider></mat-divider>
+
+    <!-- Form -->
+    <mat-dialog-content>
+        <form [formGroup]="projectsForm">
+            <!-- Project ID -->
+            <mat-form-field appearance="fill" class="form-description">
+                <mat-label>ID</mat-label>
+                <input formControlName="id" matInput readonly>
+            </mat-form-field>
+
+            <!-- Project description -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Descripción</mat-label>
+                <input formControlName="description" matInput placeholder="Introduce la descripción del proyecto">
+                <mat-error *ngIf="descriptionError()">Debe introducir alguna descripción de proyecto</mat-error>
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+
+    <!-- Buttons -->
+    <mat-dialog-actions style="justify-content: center">
+        <!-- Cancel button -->
+        <button mat-button class="cancel-button" (click)="closeDialog()">
+            Cancelar
+        </button>
+
+        <!-- Edit button -->
+        <button mat-button [disabled]="projectsForm.invalid" class="edit-button" (click)="editProject()">
+            Guardar
+        </button>
+    </mat-dialog-actions>
+</div>

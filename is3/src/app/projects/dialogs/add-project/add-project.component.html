@@ -1,0 +1,34 @@
+<!-- Add project dialog -->
+<div style="width: 500px">
+    <h2 mat-dialog-title>Nuevo Proyecto</h2>
+    <mat-divider></mat-divider>
+
+    <!-- Form -->
+    <mat-dialog-content>
+        <form [formGroup]="projectsForm">
+            <!-- Project description -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Descripción</mat-label>
+                <input formControlName="description" placeholder="Introduce la descripción del proyecto" matInput>
+                <mat-error *ngIf="descriptionError()">Debe introducir alguna descripción de proyecto</mat-error>
+            </mat-form-field>
+        
+            <!-- Project status -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-select">
+                <mat-label>Estado del proyecto</mat-label>
+                <mat-select formControlName="status">
+                  <mat-option value="active">Activo</mat-option>
+                  <mat-option value="paused">En pausa</mat-option>
+                </mat-select>
+                <mat-error *ngIf="statusError()">Debe introducir el estatus del proyecto</mat-error>
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+
+    <!-- Add button -->
+    <mat-dialog-actions style="justify-content: center">
+        <button [disabled]="projectsForm.invalid" mat-button class="add-button" (click)="addProject()">
+            Agregar
+        </button>
+    </mat-dialog-actions>
+</div>
