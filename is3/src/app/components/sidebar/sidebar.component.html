@@ -1,11 +1,20 @@
+<mat-toolbar class="barra" style="background-color: transparent; position: absolute;">
+    <span class="scrum">Scrum-APM</span>
+</mat-toolbar>
+<div class="example-button-container">
+    <button mat-fab color="warn" (click) = "exit()" aria-label="Example icon button with a home icon" style="border-radius: 10px; background-color: red; position: absolute; left: 98%; transform: translate(-98%, 0);">
+      <mat-icon style="color: white;">exit_to_app</mat-icon>
+    </button>
+  </div>
 <div class="content">
     <div class="sidebar-wrapper">
         <ul class="nav">
             <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-                <a class="nav-link" [routerLink]="[menuItem.path]">
+                <a class="nav-link" [routerLink]="[menuItem.path]" style="width: 200px;">
                     <p>{{menuItem.title}}</p>
                 </a>
             </li>
         </ul>
     </div>
 </div>
+

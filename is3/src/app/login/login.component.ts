@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     
-    this.prueba = ["cristomax","hola"],
+    this.prueba = ["usuario","1234"],
     this.form = this.formBuilder.group({
       user: [null, [Validators.required]],
       password: [null, [Validators.required]],
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
  onSubmit(values: any){
     //Debemos verificar el login usando el servicio
     if ((values.user ===this.prueba[0]) && (values.password === this.prueba[1])) {
-      this.router.navigate(["/dashboard"])
+      this.router.navigate(["/user-profile"])
     }
     else{
       const dialogRef = this.dialog.open(DialogErrorLogin);

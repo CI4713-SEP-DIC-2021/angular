@@ -9,3 +9,18 @@ a {
 a:hover {
     text-decoration: none;
  }
+
+ .scrum{
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-size: xx-large;
+}
+
+.barra{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 200px;
+}

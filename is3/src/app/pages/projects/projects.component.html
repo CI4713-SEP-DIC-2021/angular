@@ -17,48 +17,49 @@
           <mat-icon style="margin-left: 20px">add</mat-icon>
         </button>
       </div>
-    
-      <!-- Table of projects -->
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%; margin-bottom: 200px; margin-top: 150px">
-      
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> Id. </th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
-      
-        <!-- Description Column -->
-        <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef> Descripción </th>
-          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
-      
-        <!-- Actions Column -->
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef style="width: 150px">  </th>
-          <td mat-cell *matCellDef="let element">
-              <!-- Activate project -->
-              <button mat-icon-button *ngIf="!element.status" (click)="changeStatus(element)" class="action-buttons" title="Activar">
-                  <mat-icon>play_arrow</mat-icon>
-              </button>
-              <!-- Pause project -->
-              <button mat-icon-button *ngIf="element.status" (click)="changeStatus(element)" class="action-buttons" title="Pausar">
-                  <mat-icon>pause</mat-icon>
-              </button>
-              <!-- Edit project -->
-              <button mat-icon-button (click)="editProject(element)" class="action-buttons">
-                  <mat-icon>edit</mat-icon>
-              </button>
-              <!-- Delete project -->
-              <button mat-icon-button (click)="deleteProject(element)" class="delete-button">
-                  <mat-icon>delete</mat-icon>
-              </button>
-          </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>  
+      <div class="example-table-container">
+        <!-- Table of projects -->
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+        
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+        
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Descripción </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+        
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="width: 150px">  </th>
+            <td mat-cell *matCellDef="let element">
+                <!-- Activate project -->
+                <button mat-icon-button *ngIf="!element.status" (click)="changeStatus(element)" class="action-buttons" title="Activar">
+                    <mat-icon>play_arrow</mat-icon>
+                </button>
+                <!-- Pause project -->
+                <button mat-icon-button *ngIf="element.status" (click)="changeStatus(element)" class="action-buttons" title="Pausar">
+                    <mat-icon>pause</mat-icon>
+                </button>
+                <!-- Edit project -->
+                <button mat-icon-button (click)="editProject(element)" class="action-buttons">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <!-- Delete project -->
+                <button mat-icon-button (click)="deleteProject(element)" class="delete-button">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>  
     </mat-card>
     
   <app-footer></app-footer>

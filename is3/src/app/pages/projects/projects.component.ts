@@ -13,7 +13,7 @@ const PROJECT_DATA: Project[] = [
   {id: 1, description: 'Proyecto 1', status: true},
   {id: 2, description: 'Proyecto 2', status: false},
   {id: 3, description: 'Proyecto 3', status: true},
-  {id: 4, description: 'Proyecto 4', status: false}
+  {id: 4, description: 'Proyecto 4', status: false},
 ];
 
 

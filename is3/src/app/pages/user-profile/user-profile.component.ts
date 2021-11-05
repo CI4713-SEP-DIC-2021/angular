@@ -12,6 +12,7 @@ export interface UserProfile {
 const ELEMENT_DATA: UserProfile[] = [
   {id: 1, username: 'jeancguzman', name: 'Jean', lastName: 'Guzman', rol: 'Product. O'},
   {id: 2, username: 'josepulido', name: 'Jose', lastName: 'Pulido', rol: 'Scrum Ma.'},
+  
 ];
 
 
@@ -32,5 +33,9 @@ export class UserProfileComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  addUser(){
+
   }
 }

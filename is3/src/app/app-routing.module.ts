@@ -4,6 +4,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { EventsComponent } from './pages/events/events.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+  },
+  {
+    path: 'events',
+    component: EventsComponent,
   },
 ];
 

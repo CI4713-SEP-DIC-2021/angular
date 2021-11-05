@@ -31,6 +31,7 @@ import { DeleteProjectComponent } from './pages/projects/dialogs/delete-project/
 import { EditProjectComponent } from './pages/projects/dialogs/edit-project/edit-project.component';
 import { LoginComponent, DialogErrorLogin } from './login/login.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import { EventsComponent } from './pages/events/events.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
     DeleteProjectComponent,
     EditProjectComponent,
     DialogErrorLogin,
+    EventsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
