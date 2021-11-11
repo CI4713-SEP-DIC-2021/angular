@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 
 // Components
@@ -62,6 +63,7 @@ import { EventsComponent } from './pages/events/events.component';
     ReactiveFormsModule,
     MatTableModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     MatDividerModule,
     MatDialogModule,
     MatSelectModule,

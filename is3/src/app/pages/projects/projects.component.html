@@ -19,7 +19,7 @@
       </div>
       <div class="example-table-container">
         <!-- Table of projects -->
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+        <table mat-table *ngIf="projectsList" [dataSource]="projectsList" class="mat-elevation-z8" style="width: 100%;">
         
           <!-- ID Column -->
           <ng-container matColumnDef="id">
@@ -38,11 +38,11 @@
             <th mat-header-cell *matHeaderCellDef style="width: 150px">  </th>
             <td mat-cell *matCellDef="let element">
                 <!-- Activate project -->
-                <button mat-icon-button *ngIf="!element.status" (click)="changeStatus(element)" class="action-buttons" title="Activar">
+                <button mat-icon-button *ngIf="element.status === 'active'" (click)="changeStatus(element)" class="action-buttons" title="Activar">
                     <mat-icon>play_arrow</mat-icon>
                 </button>
                 <!-- Pause project -->
-                <button mat-icon-button *ngIf="element.status" (click)="changeStatus(element)" class="action-buttons" title="Pausar">
+                <button mat-icon-button *ngIf="element.status === 'paused'" (click)="changeStatus(element)" class="action-buttons" title="Pausar">
                     <mat-icon>pause</mat-icon>
                 </button>
                 <!-- Edit project -->

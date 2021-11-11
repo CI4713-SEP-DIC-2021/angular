@@ -6,16 +6,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ProjectsService {
 
+  readonly url = 'http://127.0.0.1:5000'
 
   constructor(private http: HttpClient) { }
 
-  // TODO: falta verificar si el usuario esta autenticado
-  getAll() {
-    const userId = '1';
-    return this.http.get(`url/${userId}`)
+  getAllByUser(userId: number) {
+    return this.http.get(`${this.url}/projects/getall/${userId}`)
     .toPromise()
     .then(
       (response) => {
+        console.log(response)
         return response;
     },
       (error) => {
@@ -31,12 +31,18 @@ export class ProjectsService {
       Accept: 'application/json',
       token: '?'
     });
-    const userId = 1;
-    const jsonStruct =  JSON.stringify({...project, user_id: userId});
-    return this.http.post('url', jsonStruct, {headers})
+
+    const proyectObject = {
+      "description": 'asdasd',
+      "user_id": 2,
+      "status": "active"
+    };
+
+    return this.http.post(`${this.url}/projects/add`, proyectObject, {headers})
     .toPromise()
     .then(
       (response) => {
+        console.log(response);
         return response;
       },
       (error) => {
@@ -47,18 +53,22 @@ export class ProjectsService {
   }
 
   edit(project: any) {
-    const projectId = project.id;
-    const userId = 1;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
       token: '?'
     });
-    const jsonStruct =  JSON.stringify({...project, user_id: userId});
-    return this.http.put(`url/${projectId}`, jsonStruct, {headers})
+    
+    const proyectObject = {
+      "description": project?.description,
+      "user_id": project?.user_id,
+    };
+    
+    return this.http.put(`${this.url}/projects/update/1`, proyectObject, {headers})
     .toPromise()
     .then(
       (response) => {
+        console.log(response);
         return response;
       },
       (error) => {
@@ -67,13 +77,12 @@ export class ProjectsService {
     );
   }
 
-  changeStatus(project: any,  action: string) {
-    const url = action === 'pause' ? 'pausarUrl' : 'reactivar';
-    const projectId = project.id;
-    return this.http.put(`${url}/${projectId}`, {})
+  pause(projectId: number) {
+    return this.http.patch(`${this.url}/projects/pause/${projectId}`, {})
     .toPromise()
     .then(
       (response) => {
+        console.log(response);
         return response;
       },
       (error) => {
@@ -83,12 +92,27 @@ export class ProjectsService {
     );
   }
 
-  delete(project: any) {
-    const projectId = project.id;
-    return this.http.delete(`url/${projectId}`)
+  reactivate(projectId: number) {
+    return this.http.patch(`${this.url}/projects/reactivate/${projectId}`, {})
     .toPromise()
     .then(
       (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        // Devuelvo null
+        console.log(error);
+      }
+    );
+  }
+
+  delete(projectId: number) {
+    return this.http.delete(`${this.url}/projects/delete/${projectId}`)
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
         return response;
       },
       (error) => {

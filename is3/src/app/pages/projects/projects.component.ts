@@ -4,16 +4,18 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 // Components
 import { AddProjectComponent } from './dialogs/add-project/add-project.component';
 import { DeleteProjectComponent } from './dialogs/delete-project/delete-project.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 // Project model
 import { Project } from 'src/app/models/project';
 import { EditProjectComponent } from './dialogs/edit-project/edit-project.component';
+import { ProjectsService } from 'src/app/services/projects.service';
 
 const PROJECT_DATA: Project[] = [
-  {id: 1, description: 'Proyecto 1', status: true},
-  {id: 2, description: 'Proyecto 2', status: false},
-  {id: 3, description: 'Proyecto 3', status: true},
-  {id: 4, description: 'Proyecto 4', status: false},
+  {id: 1, description: 'Proyecto 1', status: 'active'},
+  {id: 2, description: 'Proyecto 2', status: 'paused'},
+  {id: 3, description: 'Proyecto 3', status: 'active'},
+  {id: 4, description: 'Proyecto 4', status: 'active'},
 ];
 
 
@@ -25,14 +27,22 @@ const PROJECT_DATA: Project[] = [
 export class ProjectsComponent implements OnInit {
 
   search!: string;    // input search
+  projectsList = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private projectService: ProjectsService) { }
 
   ngOnInit(): void {
+    this.projectService.getAllByUser(1).then((projects: any) => {
+      if (projects) { 
+        this.projectsList = projects;
+      }
+      console.log(this.projectsList);
+    });
   }
 
   displayedColumns: string[] = ['id', 'description', 'actions'];
-  dataSource = PROJECT_DATA;
 
   /**
    * changeStatus
@@ -40,7 +50,12 @@ export class ProjectsComponent implements OnInit {
    * @param project Project element
    */
   changeStatus(project: Project) {
-    project.status = !project.status;
+    if(project.status === 'active') {
+      this.projectService.pause(project?.id);
+    } else {
+      this.projectService.reactivate(project?.id);
+    }
+    this.getProjectList();
   }
 
   /**
@@ -49,12 +64,12 @@ export class ProjectsComponent implements OnInit {
    */
   searchProject() {
     if (this.search != "") {
-      this.dataSource = PROJECT_DATA.filter(res => {
-        return res.description.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+      this.projectsList = this.projectsList.filter((res: any) => {
+        return res?.description.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
       })
     } else {
-      this.dataSource = PROJECT_DATA;
-      this.ngOnInit();
+      this.projectsList = this.projectsList;
+      this.getProjectList();
     }
   }
 
@@ -89,4 +104,12 @@ export class ProjectsComponent implements OnInit {
     
   }
 
+  getProjectList(userId = 1) {
+    this.projectService.getAllByUser(userId).then((projects: any) => {
+      if (projects) { 
+        this.projectsList = projects;
+      }
+      console.log(this.projectsList);
+    });
+  }
 }
