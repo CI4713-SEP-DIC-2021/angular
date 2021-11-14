@@ -1,6 +1,6 @@
 import {  NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserProfileComponent } from './user-profile.component';
+import { UserProfileComponent, SignUpDialog } from './user-profile.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
@@ -8,10 +8,12 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
-  declarations: [UserProfileComponent],
+  declarations: [UserProfileComponent, SignUpDialog],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -20,7 +22,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatIconModule,
     MatDividerModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule,
+    MatDialogModule,
   ],
   exports: [
     UserProfileComponent,

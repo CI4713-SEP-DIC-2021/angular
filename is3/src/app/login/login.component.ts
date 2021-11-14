@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: "dialog-errorLogin",
@@ -34,11 +35,12 @@ export class LoginComponent implements OnInit {
     private router: Router,
     public dialogRef: MatDialogRef<LoginComponent>,
     public dialog: MatDialog,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit() {
     
-    this.prueba = ["usuario","1234"],
+    //this.prueba = ["usuario","1234"],
     this.form = this.formBuilder.group({
       user: [null, [Validators.required]],
       password: [null, [Validators.required]],
@@ -47,13 +49,17 @@ export class LoginComponent implements OnInit {
   }
 
  onSubmit(values: any){
-    //Debemos verificar el login usando el servicio
-    if ((values.user ===this.prueba[0]) && (values.password === this.prueba[1])) {
+  this.loginService.login(values.user, values.password).then((data: any) => {
+    if (data) { 
+     // console.log(data)
+      localStorage.setItem('acces_token', data.access_token);
+      localStorage.setItem('refresh_token', data.refresh_token);
       this.router.navigate(["/user-profile"])
     }
     else{
       const dialogRef = this.dialog.open(DialogErrorLogin);
     }
+  });
  }
 
  recover_password(){

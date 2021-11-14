@@ -1,0 +1,27 @@
+<h1 mat-dialog-title style="text-align: center;">Ingrese los datos para crear un nuevo usuario</h1>
+<div mat-dialog-content style="text-align: center;">
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre de usuario</mat-label>
+    <input matInput [(ngModel)]="data.user_name">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input matInput [(ngModel)]="data.first_name">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Apellido</mat-label>
+    <input matInput [(ngModel)]="data.last_name">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Rol</mat-label>
+    <input matInput [(ngModel)]="data.role">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Contraseña</mat-label>
+    <input matInput [(ngModel)]="data.password">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="justify-content: space-evenly">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="[data.user_name, data.first_name, data.last_name, data.role, data.password]" cdkFocusInitial>Registrar</button>
+</div>
