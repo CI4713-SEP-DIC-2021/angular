@@ -5,6 +5,21 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { FormsModule } from '@angular/forms';
 
 @Component({
+  selector: 'projectsUser',
+  templateUrl: 'projectsUser.html',
+})
+export class projectsUserDialog {
+  constructor(
+    public dialogRef: MatDialogRef<projectsUserDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
   selector: 'signUp',
   templateUrl: 'signUp.html',
 })
@@ -19,12 +34,29 @@ export class SignUpDialog {
   }
 }
 
+@Component({
+  selector: 'editUser',
+  templateUrl: 'editUser.html',
+})
+export class editUserDialog {
+  constructor(
+    public dialogRef: MatDialogRef<editUserDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
 export interface DialogData {
   user_name: string;
   first_name: string;
   last_name: string;
   role: string;
   password: string;
+  projectsList: any[];
+  aux: string;
 }
 
 export interface UserProfile {
@@ -33,11 +65,12 @@ export interface UserProfile {
   lastName: string;
   id: number;
   rol: string;
+  edit: string;
 }
 
 const ELEMENT_DATA: UserProfile[] = [
-  {id: 1, username: 'jeancguzman', name: 'Jean', lastName: 'Guzman', rol: 'Product. O'},
-  {id: 2, username: 'josepulido', name: 'Jose', lastName: 'Pulido', rol: 'Scrum Ma.'},
+  //{id: 1, username: 'jeancguzman', name: 'Jean', lastName: 'Guzman', rol: 'Product. O'},
+  //{id: 2, username: 'josepulido', name: 'Jose', lastName: 'Pulido', rol: 'Scrum Ma.'},
   
 ];
 
@@ -48,9 +81,10 @@ const ELEMENT_DATA: UserProfile[] = [
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'username', 'lastName' ,'name', 'rol'];
+  displayedColumns: string[] = ['id', 'username', 'lastName' ,'name', 'rol', 'edit'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);;
-  userList = [];
+  userList = [] as any;
+  projectsList = [] as any;
   token: any;
   userRole = "";
   user_name!: string;
@@ -58,6 +92,7 @@ export class UserProfileComponent implements OnInit {
   last_name!: string;
   role!: string;
   password!: string;
+  aux= "";
   constructor(private UserProfileService: UserProfileService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -100,5 +135,65 @@ export class UserProfileComponent implements OnInit {
         });
       }
     });
+  }
+
+  change(id: string){
+    if((this.userRole === 'Product Owner') || (this.userRole === 'Scrum Master')){
+      //console.log("soy el rol")
+      //console.log(rol)
+      var x = parseInt(id);
+      var lista = this.userList[x-1];
+      this.user_name = lista.username;
+      this.role = lista.role
+      const dialogRef = this.dialog.open(editUserDialog, {
+        width: '400px',
+        data: {username: this.user_name, rol: this.role},
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if(result){
+          this.UserProfileService.edit(this.token, this.user_name, result).then((error: any) => {
+            if (error) { 
+              //console.log(error);
+              this.ngOnInit();
+            }
+            console.log(error);
+          });
+        }
+      });
+    } 
+  }
+
+  delete(id: string){
+    // falta que el backend implemente la funcionalidad
+  }
+
+  projects(id: string){
+    this.UserProfileService.getProjects(id).then((result: any) => {
+      if (result) { 
+        //console.log(result);
+        this.projectsList = result;
+        for (var index1 in this.projectsList) {
+          //console.log(index1)
+          if(this.projectsList[index1].description){
+            this.aux = this.aux + this.projectsList[index1].description + ", "
+          }
+         
+        }
+        console.log(this.aux)
+        const dialogRef = this.dialog.open(projectsUserDialog, {
+          width: '400px',
+          data: {aux: this.aux},
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          if(result){
+          }
+        });
+      }
+      //console.log(result);
+    });
+    this.aux = ""
+    
   }
 }

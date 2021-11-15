@@ -46,3 +46,17 @@
   overflow: auto;
   width: 100%;
 }
+
+a {
+  color: rgb(55, 0, 255);
+  font-family: helvetica;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  color: black;
+}

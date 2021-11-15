@@ -29,7 +29,7 @@ export class UserProfileService {
     .toPromise()
     .then(
       (response) => {
-        //console.log(response)
+        console.log(response)
         return response;
     },
       (error) => {
@@ -38,4 +38,31 @@ export class UserProfileService {
     );
   }
 
+  edit(token: string, username2: string, new_role2: string ){
+    return this.http.post(`${this.url}/user/edit`, {username: username2, new_role: new_role2}, {headers: {'Authorization': `Bearer ${token}`}})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response)
+        return response;
+    },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getProjects(id: string){
+    return this.http.get(`${this.url}/projects/getall/${id}`)
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response)
+        return response;
+    },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

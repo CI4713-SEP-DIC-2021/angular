@@ -12,13 +12,21 @@
     <mat-label>Apellido</mat-label>
     <input matInput [(ngModel)]="data.last_name">
   </mat-form-field>
-  <mat-form-field appearance="fill">
+  <!--<mat-form-field appearance="fill">
     <mat-label>Rol</mat-label>
     <input matInput [(ngModel)]="data.role">
+  </mat-form-field>-->
+  <mat-form-field appearance="fill">
+    <mat-label>Rol</mat-label>
+    <mat-select Rol [(ngModel)]="data.role">
+      <mat-option value="Product Owner">Product Owner</mat-option>
+      <mat-option value="Scrum Master">Scrum Master</mat-option>
+      <mat-option value="Scrum Team">Scrum Team</mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Contraseña</mat-label>
-    <input matInput [(ngModel)]="data.password">
+    <input type="password" matInput [(ngModel)]="data.password">
   </mat-form-field>
 </div>
 <div mat-dialog-actions style="justify-content: space-evenly">

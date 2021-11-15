@@ -1,0 +1,17 @@
+<h1 mat-dialog-title style="text-align: center;">Edite el rol del usuario {{data.user_name}}</h1>
+<div mat-dialog-content style="text-align: center;">
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Rol</mat-label>
+    <mat-select Rol [(ngModel)]="data.role">
+      <mat-option value="Product Owner">Product Owner</mat-option>
+      <mat-option value="Scrum Master">Scrum Master</mat-option>
+      <mat-option value="Scrum Team">Scrum Team</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+</div>
+<div mat-dialog-actions style="justify-content: space-evenly">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data.role" cdkFocusInitial>Editar</button>
+</div>
