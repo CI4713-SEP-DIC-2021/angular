@@ -65,4 +65,18 @@ export class UserProfileService {
       }
     );
   }
+
+  delete(token: string, username2: string ){
+    return this.http.post(`${this.url}/user/delete`, {username: username2}, {headers: {'Authorization': `Bearer ${token}`}})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response)
+        return response;
+    },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

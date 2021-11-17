@@ -5,6 +5,21 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { FormsModule } from '@angular/forms';
 
 @Component({
+  selector: 'deleteUser',
+  templateUrl: 'deleteUser.html',
+})
+export class deleteUserDialog {
+  constructor(
+    public dialogRef: MatDialogRef<deleteUserDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
   selector: 'projectsUser',
   templateUrl: 'projectsUser.html',
 })
@@ -141,8 +156,10 @@ export class UserProfileComponent implements OnInit {
     if((this.userRole === 'Product Owner') || (this.userRole === 'Scrum Master')){
       //console.log("soy el rol")
       //console.log(rol)
-      var x = parseInt(id);
-      var lista = this.userList[x-1];
+      //var x = parseInt(id);
+      //var lista = this.userList[x-1];
+      var index = this.userList.findIndex((user: { id: string; }) => user.id === id);
+      var lista = this.userList[index];
       this.user_name = lista.username;
       this.role = lista.role
       const dialogRef = this.dialog.open(editUserDialog, {
@@ -162,10 +179,6 @@ export class UserProfileComponent implements OnInit {
         }
       });
     } 
-  }
-
-  delete(id: string){
-    // falta que el backend implemente la funcionalidad
   }
 
   projects(id: string){
@@ -195,5 +208,32 @@ export class UserProfileComponent implements OnInit {
     });
     this.aux = ""
     
+  }
+
+  deleteUser(id: string){
+    if((this.userRole === 'Product Owner') || (this.userRole === 'Scrum Master')){
+
+      var index = this.userList.findIndex((user: { id: string; }) => user.id === id);
+      var lista = this.userList[index];
+      this.user_name = lista.username;
+      //console.log(lista)
+      //console.log(this.user_name)
+      const dialogRef = this.dialog.open(deleteUserDialog, {
+        width: '400px',
+        data: {user_name: this.user_name},
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if(result){
+          this.UserProfileService.delete(this.token, this.user_name).then((error: any) => {
+            if (error) { 
+              //console.log(error);
+              this.ngOnInit();
+            }
+            console.log(error);
+          });
+        }
+      });
+    } 
   }
 }
