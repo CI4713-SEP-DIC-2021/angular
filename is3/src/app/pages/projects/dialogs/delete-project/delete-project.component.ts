@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Inject } from '@angular/core';
+import { ProjectsService } from 'src/app/services/projects.service';
 
 // Dialog
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -15,6 +16,7 @@ export class DeleteProjectComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<DeleteProjectComponent>,
+    private projectsService: ProjectsService,
     @Inject(MAT_DIALOG_DATA) data: any
     ) 
     {
@@ -38,6 +40,7 @@ export class DeleteProjectComponent implements OnInit {
    */
   deleteProject() {
     console.log(this.projectId);
+    this.projectsService.delete(this.projectId);
     this.closeDialog();
   }
 

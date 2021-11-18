@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, Validators } from '@angular/forms';
+import { ProjectsService } from 'src/app/services/projects.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -10,7 +13,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class AddProjectComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private projectsService: ProjectsService,
+    private loginService: LoginService,
+    private dialogRef: MatDialogRef<AddProjectComponent>
+  ) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +35,8 @@ export class AddProjectComponent implements OnInit {
   addProject() {
     // Adds a new project
     console.log(this.projectsForm.value);
+    this.projectsService.create(this.projectsForm.value);
+    this.dialogRef.close();
   }
 
   /**

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class ProjectsService {
 
   readonly url = 'http://127.0.0.1:5000'
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loginService: LoginService) { }
 
   getAllByUser(userId: number) {
     return this.http.get(`${this.url}/projects/getall/${userId}`)
@@ -20,6 +21,7 @@ export class ProjectsService {
     },
       (error) => {
         console.log(error);
+        return [];
       }
     );
   }
@@ -38,7 +40,10 @@ export class ProjectsService {
       "status": "active"
     };
 
-    return this.http.post(`${this.url}/projects/add`, proyectObject, {headers})
+    project.user_id = this.loginService.getCurrentID();
+
+    //return this.http.post(`${this.url}/projects/add`, proyectObject, {headers})
+    return this.http.post(`${this.url}/projects/add`, project, {headers})
     .toPromise()
     .then(
       (response) => {
@@ -49,7 +54,7 @@ export class ProjectsService {
         // Devuelvo null
         console.log(error);
       }
-    );
+    ); 
   }
 
   edit(project: any) {
@@ -63,8 +68,10 @@ export class ProjectsService {
       "description": project?.description,
       "user_id": project?.user_id,
     };
+
+    project.user_id = this.loginService.getCurrentID();
     
-    return this.http.put(`${this.url}/projects/update/1`, proyectObject, {headers})
+    return this.http.put(`${this.url}/projects/update/${project.id}`, project, {headers})
     .toPromise()
     .then(
       (response) => {

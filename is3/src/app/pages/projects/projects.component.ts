@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Project } from 'src/app/models/project';
 import { EditProjectComponent } from './dialogs/edit-project/edit-project.component';
 import { ProjectsService } from 'src/app/services/projects.service';
+import { LoginService } from 'src/app/services/login.service';
 
 const PROJECT_DATA: Project[] = [
   {id: 1, description: 'Proyecto 1', status: 'active'},
@@ -29,15 +30,21 @@ export class ProjectsComponent implements OnInit {
   search!: string;    // input search
   projectsList = [];
 
+  current_user_id: any;
+
   constructor(
     public dialog: MatDialog,
-    private projectService: ProjectsService) { }
+    private projectService: ProjectsService,
+    private loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.projectService.getAllByUser(1).then((projects: any) => {
-      if (projects) { 
+    this.current_user_id = this.loginService.getCurrentID();
+
+    this.projectService.getAllByUser(this.current_user_id).then((projects: any) => {
+      var is_array = Array.isArray(projects);
+      if (is_array) { 
         this.projectsList = projects;
-      }
+      } 
       console.log(this.projectsList);
     });
   }
@@ -56,6 +63,7 @@ export class ProjectsComponent implements OnInit {
       this.projectService.reactivate(project?.id);
     }
     this.getProjectList();
+    this.ngOnInit();
   }
 
   /**
@@ -78,7 +86,10 @@ export class ProjectsComponent implements OnInit {
    * Opens dialog to add a new project
    */
   addProject() {
-    this.dialog.open(AddProjectComponent);
+    this.dialog.open(AddProjectComponent).afterClosed()
+    .subscribe(result => {
+      this.ngOnInit()
+    });
   }
 
   /**
@@ -89,7 +100,11 @@ export class ProjectsComponent implements OnInit {
   editProject(project: Project) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = { project: project }
-    this.dialog.open(EditProjectComponent, dialogConfig);
+    
+    this.dialog.open(EditProjectComponent, dialogConfig).afterClosed()
+    .subscribe(result => {
+      this.ngOnInit()
+    });
   }
 
   /**
@@ -100,12 +115,17 @@ export class ProjectsComponent implements OnInit {
   deleteProject(project: Project) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = { id: project.id }
-    this.dialog.open(DeleteProjectComponent, dialogConfig);
-    
+
+    this.dialog.open(DeleteProjectComponent, dialogConfig).afterClosed()
+    .subscribe(result => {
+      this.ngOnInit()
+    });
+
   }
 
-  getProjectList(userId = 1) {
-    this.projectService.getAllByUser(userId).then((projects: any) => {
+  getProjectList() {
+    this.current_user_id = this.loginService.getCurrentID();
+    this.projectService.getAllByUser(this.current_user_id).then((projects: any) => {
       if (projects) { 
         this.projectsList = projects;
       }

@@ -3,6 +3,7 @@ import { Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Project } from 'src/app/models/project';
+import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
   selector: 'app-edit-project',
@@ -17,6 +18,7 @@ export class EditProjectComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<EditProjectComponent>,
+    private projectsService: ProjectsService,
     @Inject(MAT_DIALOG_DATA) data: any
   ) {
       this.project = data.project
@@ -36,6 +38,7 @@ export class EditProjectComponent implements OnInit {
    */
   editProject() {
     console.log(this.project);
+    this.projectsService.edit(this.projectsForm.value);
     this.closeDialog();
   }
 
