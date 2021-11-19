@@ -1,0 +1,41 @@
+<!-- Add story dialog -->
+<div style="width: 500px">
+    <h2 mat-dialog-title>Agregar Historia de Usuario</h2>
+    <mat-divider></mat-divider>
+
+    <!-- Form -->
+    <mat-dialog-content>
+        <form [formGroup]="userStoryForm">
+            <!-- User story description -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Descripción</mat-label>
+                <input formControlName="description" placeholder="Introduce la descripción de la historia de usuario" matInput>
+                <mat-error *ngIf="displayError('description')">Debe introducir alguna descripción para la historia de usuario</mat-error>
+            </mat-form-field>
+
+            <!-- User story (epic ?) -->
+            <mat-radio-group *ngIf="!child" formControlName="epic" style="margin-left: 50px">
+                <mat-radio-button value="true" style="margin-right: 30px">Épica</mat-radio-button>
+                <mat-radio-button value="false">No épica</mat-radio-button>
+            </mat-radio-group>
+        
+            <!-- User story priority -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-select">
+                <mat-label>Prioridad</mat-label>
+                <mat-select formControlName="priority">
+                  <mat-option value="high">Alta</mat-option>
+                  <mat-option value="medium">Media</mat-option>
+                  <mat-option value="low">Baja</mat-option>
+                </mat-select>
+                <mat-error *ngIf="displayError('priority')">Debe introducir la prioridad de la historia de usuario</mat-error>
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+
+    <!-- Add button -->
+    <mat-dialog-actions style="justify-content: center">
+        <button [disabled]="userStoryForm.invalid" mat-button class="add-button" (click)="addStory()">
+            Agregar
+        </button>
+    </mat-dialog-actions>
+</div>

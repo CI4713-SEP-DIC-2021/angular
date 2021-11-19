@@ -1,0 +1,105 @@
+<div class="fondo">
+    <app-sidebar></app-sidebar>
+  <!-- Projects' Card -->
+  <mat-card style="width: 70%; margin: 0 auto; margin-top: 30px; height: 35rem">
+      <mat-card-title>Product Backlog</mat-card-title>
+      <mat-card-title style="text-align: center"> {{ projectDescription }} </mat-card-title>
+      <mat-divider style="margin-top: 10px"></mat-divider>
+    
+      <div style="float: right">
+        <!-- Search input -->
+        <mat-form-field appearance="outline" style="margin-top: 40px; width: 500px; margin-right: 30px">
+          <input matInput [(ngModel)]="search_input" (keyup)="search()" placeholder="Buscar historias" style="margin-bottom: 5px">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    
+        <!-- Add project -->
+        <button mat-button class="add-button" (click)="add(0, false)"> Agregar historia
+          <mat-icon style="margin-left: 20px">add</mat-icon>
+        </button>
+      </div>
+
+      <div class="example-table-container">
+        <!-- Table of projects -->
+        <table mat-table *ngIf="userStoriesList" [dataSource]="userStoriesList" class="mat-elevation-z8" style="width: 100%;">
+        
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id. </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.parent_id == null ? '#F0F0F0':''}"> {{element.id}} </td>
+          </ng-container>
+        
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Historias de Usuario </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.parent_id == null ? '#F0F0F0':''}"> {{ element.description }} </td>
+          </ng-container>
+
+          <!-- Épica -->
+          <ng-container matColumnDef="epica">
+            <th mat-header-cell *matHeaderCellDef> Épica </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.parent_id == null ? '#F0F0F0':''}">
+              <mat-checkbox *ngIf="element.parent_id == null" [disabled]="disableCheckbox(element.id)" [checked]="element.epic" (change)="editEpic(element)"></mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Priority column -->
+          <ng-container matColumnDef="priority">
+            <th mat-header-cell *matHeaderCellDef> Prioridad </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.parent_id == null ? '#F0F0F0':''}">
+
+              <mat-form-field appearance="outline" style="width: 100px; height: 60px">
+                <mat-select [value]="element.priority" (selectionChange)="editPriority($event, element)">
+                  <mat-option value="high">Alta</mat-option>
+                  <mat-option value="medium">Media</mat-option>
+                  <mat-option value="low">Baja</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+            </td>
+          </ng-container>
+
+          <!-- Done column -->
+          <ng-container matColumnDef="done">
+            <th mat-header-cell *matHeaderCellDef> Hecha </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.parent_id == null ? '#F0F0F0':''}">
+              <mat-checkbox [checked]="element.done" (change)="editDone(element)"></mat-checkbox>
+            </td>
+          </ng-container>
+        
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="width: 350px">  </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.parent_id == null ? '#F0F0F0':''}">
+                <!-- Add user story to an epic -->
+                <button mat-icon-button *ngIf="element.epic" (click)="add(element.id, true)" class="action-buttons">
+                    <mat-icon>add_circle_outline</mat-icon>
+                </button>
+
+                <span *ngIf="!element.epic" style="margin-right: 55px"></span>
+
+                <!-- Edit user story -->
+                <button mat-icon-button (click)="edit(element)" class="action-buttons">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <!-- Delete user story -->
+                <button mat-icon-button (click)="delete(element.id)" class="delete-button">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
+
+                <!-- Selected user story -->
+                <mat-checkbox style="margin-left: 100px"></mat-checkbox>
+
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>  
+    </mat-card>
+    
+  <app-footer></app-footer>
+</div>

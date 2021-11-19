@@ -19,7 +19,7 @@
       </div>
       <div class="example-table-container">
         <!-- Table of projects -->
-        <table mat-table *ngIf="projectsList" [dataSource]="projectsList" class="mat-elevation-z8" style="width: 100%;">
+        <table mat-table *ngIf="projectsList.length > 0" [dataSource]="projectsList" class="mat-elevation-z8" style="width: 100%;">
         
           <!-- ID Column -->
           <ng-container matColumnDef="id">
@@ -35,8 +35,12 @@
         
           <!-- Actions Column -->
           <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef style="width: 150px">  </th>
+            <th mat-header-cell *matHeaderCellDef style="width: 350px">  </th>
             <td mat-cell *matCellDef="let element">
+                <!-- Product backlog of project -->
+                <button mat-icon-button [routerLink]="['/historias', element.id]" class="action-buttons">
+                  <mat-icon>library_books</mat-icon>
+                </button>
                 <!-- Activate project -->
                 <button mat-icon-button *ngIf="element.status === 'active'" (click)="changeStatus(element)" class="action-buttons" title="Activar">
                     <mat-icon>play_arrow</mat-icon>

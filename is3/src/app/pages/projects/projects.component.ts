@@ -35,7 +35,8 @@ export class ProjectsComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private projectService: ProjectsService,
-    private loginService: LoginService) { }
+    private loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
     this.current_user_id = this.loginService.getCurrentID();

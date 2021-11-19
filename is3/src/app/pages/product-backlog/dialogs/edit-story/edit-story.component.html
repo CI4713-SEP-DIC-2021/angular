@@ -1,0 +1,30 @@
+<!-- Edit story dialog -->
+<div style="width: 500px">
+    <h2 mat-dialog-title>Editar historia de usuario</h2>
+    <mat-divider></mat-divider>
+
+    <!-- Form -->
+    <mat-dialog-content>
+        <form [formGroup]="userStoryForm">
+            <!-- User story ID -->
+            <mat-form-field appearance="fill" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>ID</mat-label>
+                <input formControlName="id" matInput readonly>
+            </mat-form-field>
+
+            <!-- User story description -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Descripción</mat-label>
+                <input formControlName="description" placeholder="Introduce la descripción de la historia de usuario" matInput>
+                <mat-error *ngIf="displayError('description')">Debe introducir alguna descripción para la historia de usuario</mat-error>
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+
+    <!-- Edit button -->
+    <mat-dialog-actions style="justify-content: center">
+        <button [disabled]="userStoryForm.invalid" mat-button class="add-button" (click)="editStory()">
+            Editar
+        </button>
+    </mat-dialog-actions>
+</div>

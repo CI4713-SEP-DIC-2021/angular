@@ -24,6 +24,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 // Components
 import { ProjectsComponent } from './pages/projects/projects.component';
@@ -33,6 +35,10 @@ import { EditProjectComponent } from './pages/projects/dialogs/edit-project/edit
 import { LoginComponent, DialogErrorLogin } from './login/login.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { EventsComponent } from './pages/events/events.component';
+import { ProductBacklogComponent } from './pages/product-backlog/product-backlog.component';
+import { AddStoryComponent } from './pages/product-backlog/dialogs/add-story/add-story.component';
+import { EditStoryComponent } from './pages/product-backlog/dialogs/edit-story/edit-story.component';
+import { DeleteStoryComponent } from './pages/product-backlog/dialogs/delete-story/delete-story.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +51,10 @@ import { EventsComponent } from './pages/events/events.component';
     EditProjectComponent,
     DialogErrorLogin,
     EventsComponent,
+    ProductBacklogComponent,
+    AddStoryComponent,
+    EditStoryComponent,
+    DeleteStoryComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -69,6 +79,8 @@ import { EventsComponent } from './pages/events/events.component';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
+    MatRadioModule,
+    MatCheckboxModule,
     UserProfileModule,
     MatDialogModule,
   ],
