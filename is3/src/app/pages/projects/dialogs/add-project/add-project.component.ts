@@ -25,7 +25,7 @@ export class AddProjectComponent implements OnInit {
 
   projectsForm = this.formBuilder.group({
     description: ['', Validators.required],
-    status: ['', Validators.required]
+    status: ['paused', Validators.required]
   })
 
   /**

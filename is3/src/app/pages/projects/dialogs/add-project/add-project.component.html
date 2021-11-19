@@ -16,7 +16,7 @@
             <!-- Project status -->
             <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-select">
                 <mat-label>Estado del proyecto</mat-label>
-                <mat-select formControlName="status">
+                <mat-select formControlName="status" [disabled]="true">
                   <mat-option value="active">Activo</mat-option>
                   <mat-option value="paused">En pausa</mat-option>
                 </mat-select>
