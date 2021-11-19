@@ -19,7 +19,7 @@
       </div>
       <div class="example-table-container">
         <!-- Table of projects -->
-        <table mat-table *ngIf="projectsList" [dataSource]="projectsList" class="mat-elevation-z8" style="width: 100%;">
+        <table mat-table *ngIf="projectsList.length > 0" [dataSource]="projectsList" class="mat-elevation-z8" style="width: 100%;">
         
           <!-- ID Column -->
           <ng-container matColumnDef="id">

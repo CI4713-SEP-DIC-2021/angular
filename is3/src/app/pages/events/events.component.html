@@ -11,17 +11,9 @@
               <input matInput (keyup)="applyFilter($event)" placeholder="Buscar evento" style="margin-bottom: 5px">
               <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
-        
-            <!-- Add project -->
-            <!-- <button mat-button class="add-button">
-              <mat-icon>add</mat-icon>
-            </button> -->
-            <button mat-button class="add-button" (click)="addEvent()"> 
-                <mat-icon>add</mat-icon>
-              </button>
           </div>
         <div class="example-table-container">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+            <table mat-table *ngIf="eventsList.length > 0" [dataSource]="eventsList" class="mat-elevation-z8" style="width: 100%;">
                 <!-- ID Column -->
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef> id </th>
