@@ -1,0 +1,134 @@
+<div class="fondo">
+    <app-sidebar></app-sidebar>
+    <mat-card style="width: 70%; margin: 0 auto; margin-top: 30px; height: 35rem">
+
+        <mat-card-title>Product Backlog</mat-card-title>
+        <mat-divider style="margin-top: 10px"></mat-divider>
+
+        <div class="example-table-container">
+            <p>Objetivos</p>
+        </div>  
+
+        <div>
+            <input type="text">
+        </div>
+
+        <div class="example-table-container">
+            <table mat-table *ngIf="projectsList.length > 0" [dataSource]="projectsList" class="mat-elevation-z8" style="width: 100%;">
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> Id. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+            
+                <!-- Description Column -->
+                <ng-container matColumnDef="Historias de usuario">
+                    <th mat-header-cell *matHeaderCellDef> Historias de usuario </th>
+                    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Historias de usuario">
+                        <th mat-header-cell *matHeaderCellDef> Épica </th>
+                        <td mat-cell *matCellDef=""></td>
+                </ng-container>
+
+                <ng-container matColumnDef="Historias de usuario">
+                        <th mat-header-cell *matHeaderCellDef> Prioridad </th>
+                        <td mat-cell *matCellDef=""></td>
+                </ng-container>
+    
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            
+            <button mat-button class="add-button" (click)=""> Agregar criterios
+                <mat-icon style="margin-left: 20px">+</mat-icon>
+            </button>
+        </div>
+
+        <div class="example-table-container">
+            <p>Criterios de aceptación</p>
+        </div>
+
+        <div class="example-table-container">
+            <table mat-table *ngIf="projectsList.length > 0" [dataSource]="projectsList" class="mat-elevation-z8" style="width: 100%;">
+
+                <ng-container>
+                    <th mat-header-cell *matHeaderCellDef> Id. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <ng-container>
+                     <th mat-header-cell *matHeaderCellDef> Historias de usuario </th>
+                    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                </ng-container>
+
+                <ng-container>
+                    <input type="checkbox">
+                </ng-container>
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef style="width: 150px">  </th>
+                    <td mat-cell *matCellDef="let element">
+                        <!-- Edit project -->
+                        <button mat-icon-button (click)="" class="action-buttons">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <!-- Delete project -->
+                        <button mat-icon-button (click)="" class="delete-button">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+            </table>
+            
+            <button mat-button class="add-button" (click)=""> Agregar prueba
+                <mat-icon style="margin-left: 20px">+</mat-icon>
+            </button>
+
+        </div>
+
+        <div class="example-table-container">
+            <p>Pruebas de aceptacion</p>
+        </div>
+
+        <div class="example-table-container">
+            <table mat-table *ngIf="projectsList.length > 0" [dataSource]="projectsList" class="mat-elevation-z8" style="width: 100%;">
+    
+                <ng-container>
+                    <th mat-header-cell *matHeaderCellDef> Id. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+    
+                <ng-container>
+                    <th mat-header-cell *matHeaderCellDef> Historias de usuario </th>
+                    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                </ng-container>
+                
+                <ng-container>
+                    <input type="checkbox">
+                </ng-container>
+    
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef style="width: 150px">  </th>
+                    <td mat-cell *matCellDef="let element">
+                        <!-- Edit project -->
+                        <button mat-icon-button (click)="" class="action-buttons">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <!-- Delete project -->
+                        <button mat-icon-button (click)="" class="delete-button">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+    
+            </table>               
+        </div>
+
+    </mat-card>
+    <app-footer></app-footer>
+</div>

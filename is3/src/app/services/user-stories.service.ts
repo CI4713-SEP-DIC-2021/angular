@@ -47,7 +47,6 @@ export class UserStoriesService {
     });
 
     story.project_id = project_id;
-
     return this.http.post(`${this.url}/stories/add`, story, {headers})
     .toPromise()
     .then(

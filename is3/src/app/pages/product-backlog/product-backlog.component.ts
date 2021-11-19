@@ -37,18 +37,7 @@ export class ProductBacklogComponent implements OnInit {
     this.projectId = this.route.snapshot.paramMap.get('id');
     this.getProjectDescription();
 
-    // Get all the stories of the project
-    this.userStoriesService.getAllByProject(this.projectId).then((stories: any) => {
-      var is_array = Array.isArray(stories);
-      if (is_array) { 
-        this.userStoriesList = stories;
-
-        // Organize the stories:
-        this.organizeStories();
-      } 
-      console.log(this.userStoriesList);
-    });
-
+    this.allStories();
 
     // Get the description of the project
     for (let i of this.projectsList) {
@@ -85,6 +74,7 @@ export class ProductBacklogComponent implements OnInit {
   add(epic_id: number, child: boolean) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = { projectId: this.projectId, child: child, epic_id: epic_id }
+    console.log(dialogConfig.data);
 
     this.dialog.open(AddStoryComponent, dialogConfig).afterClosed()
     .subscribe(result => {
@@ -284,5 +274,17 @@ export class ProductBacklogComponent implements OnInit {
     return disable;
   }
 
+  allStories() {
+    // Get all the stories of the project
+    this.userStoriesService.getAllByProject(this.projectId).then((stories: any) => {
+      var is_array = Array.isArray(stories);
+      if (is_array) { 
+        this.userStoriesList = stories;
 
+        // Organize the stories:
+        this.organizeStories();
+      } 
+      console.log(this.userStoriesList);
+    });
+  }
 }
