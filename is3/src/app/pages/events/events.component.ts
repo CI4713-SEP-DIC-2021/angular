@@ -42,28 +42,42 @@ const ELEMENT_DATA: Events[] = [
   styleUrls: ['./events.component.scss']
 })
 export class EventsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'events', 'module' ,'date'];
+  displayedColumns: string[] = ['id', 'user', 'event' ,'loged_module', 'date', 'actions'];
   eventsList = [] as any;
+  search!: string;    
 
   constructor(
     private logService: LoggerService,
   ) { }
 
   ngOnInit(): void {
+    this.getLoggerList();
+  }
+
+  applyFilter() {
+    if (this.search != "") {
+      this.eventsList = this.eventsList.filter((res: any) => {
+        if(res) {
+          return res?.event.toLocaleLowerCase().match(this.search?.toLocaleLowerCase()) || res?.loged_module.toLocaleLowerCase().match(this.search?.toLocaleLowerCase()) ;
+        }
+      })
+    } else {
+      this.eventsList = this.eventsList;
+      this.getLoggerList();
+    }
+  }
+
+  deleteEvent(id: number){
+    this.logService.deleteLog(id);
+    this.getLoggerList();
+  }
+
+  getLoggerList() {
     this.logService.getAll().then((events: any) => {
       if (Array.isArray(events)) { 
         this.eventsList = events;
       } 
       console.log(this.eventsList);
     });
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.eventsList.filter = filterValue.trim().toLowerCase();
-  }
-
-  addEvent(){
-
   }
 }

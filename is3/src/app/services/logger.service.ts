@@ -50,37 +50,6 @@ export class LoggerService {
     );
   }
 
-  addLog(user: string, event: string, module: TModule) {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      token: '?'
-    });
-
-    const log = new Logger(user, event, module);
-
-    const logObject = {
-      "user": user,
-      "event": event,
-      "module": module
-    };
-
-    console.log(log);
-
-    return this.http.post(`${this.url}/logger/add`, log, {headers})
-    .toPromise()
-    .then(
-      (response) => {
-        console.log(response);
-        return response;
-      },
-      (error) => {
-        // Devuelvo null
-        console.log(error);
-      }
-    ); 
-  }
-
   deleteLog(logId: number) {
     return this.http.delete(`${this.url}/logger/delete/${logId}`)
     .toPromise()

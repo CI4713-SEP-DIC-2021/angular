@@ -8,42 +8,46 @@
         <div style="float: right">
             <!-- Search input -->
             <mat-form-field appearance="outline" style="margin-top: 40px; width: 500px; margin-right: 30px">
-              <input matInput (keyup)="applyFilter($event)" placeholder="Buscar evento" style="margin-bottom: 5px">
+              <input matInput [(ngModel)]="search" (input)="applyFilter()" placeholder="Buscar evento" style="margin-bottom: 5px">
               <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
           </div>
         <div class="example-table-container">
             <table mat-table *ngIf="eventsList.length > 0" [dataSource]="eventsList" class="mat-elevation-z8" style="width: 100%;">
-                <!-- ID Column -->
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef> id </th>
                     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                 </ng-container>
             
-                <!-- Username Column -->
-                <ng-container matColumnDef="evento">
+                <ng-container matColumnDef="user">
+                    <th mat-header-cell *matHeaderCellDef> Usuario </th>
+                    <td mat-cell *matCellDef="let element"> {{element.user}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="event">
                     <th mat-header-cell *matHeaderCellDef> Evento </th>
-                    <td mat-cell *matCellDef="let element"> {{element.evento}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.event}} </td>
                 </ng-container>
             
-                <!-- Name Column -->
-                <ng-container matColumnDef="modulo">
-                    <th mat-header-cell *matHeaderCellDef> Módulo </th>
-                    <td mat-cell *matCellDef="let element"> {{element.modulo}} </td>
+                <ng-container matColumnDef="loged_module">
+                    <th mat-header-cell *matHeaderCellDef> Modulo
+                    <td mat-cell *matCellDef="let element"> {{element.loged_module}} </td>
                 </ng-container>
             
-                <!-- Lastname Column -->
-                <ng-container matColumnDef="fecha">
+                <ng-container matColumnDef="date">
                     <th mat-header-cell *matHeaderCellDef> Fecha </th>
-                    <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+                    <td mat-cell *matCellDef="let element"> {{ element.date | date: 'short'}} </td>
                 </ng-container>
-            
-                <!-- Rol Column -->
-                <ng-container matColumnDef="hora">
-                    <th mat-header-cell *matHeaderCellDef> Hora </th>
-                    <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <button mat-icon-button (click)="deleteEvent(element.id)" class="delete-button">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
                 </ng-container>
-                
+
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
