@@ -22,6 +22,7 @@
                       placeholder="Usuario"
                       required
                       formControlName="user"
+                      id="usuario"
                     />
                   </div>
                 </span>
@@ -38,6 +39,7 @@
                       placeholder="Contraseña"
                       required
                       formControlName="password"
+                      id="contrasena"
                     />
                     <div class="input-group-prepend">
                       <span class="input-group-text">
@@ -58,6 +60,7 @@
                   class="button"
                   type="button"
                   (click) = "recover_password()"
+                  id = "recuperar"
                   style="background:
                    none; border: none; color: rgb(97, 150, 247)"
                 >
@@ -70,6 +73,7 @@
                   [disabled]="form.invalid"
                   style="background-color: #05b322;"
                   type="submit"
+                  id= "enviar"
                 >
                   Iniciar Sesión
                 </button>

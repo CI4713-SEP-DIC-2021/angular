@@ -70,6 +70,7 @@ export class EventsComponent implements OnInit {
   deleteEvent(id: number){
     this.logService.deleteLog(id);
     this.getLoggerList();
+    this.ngOnInit();
   }
 
   getLoggerList() {

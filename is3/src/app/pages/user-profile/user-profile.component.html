@@ -16,7 +16,7 @@
             <!-- <button mat-button class="add-button">
               <mat-icon>add</mat-icon>
             </button> -->
-            <button mat-button class="add-button" (click)="addUser()" *ngIf="(userRole === 'Product Owner') || (userRole === 'Scrum Master')"> 
+            <button mat-button class="add-button" id="agregar" (click)="addUser()" *ngIf="(userRole === 'Product Owner') || (userRole === 'Scrum Master')"> 
                 <mat-icon>add</mat-icon>
               </button>
           </div>
@@ -55,9 +55,9 @@
                 <ng-container matColumnDef = "edit" > 
                     <th mat-header-cell *matHeaderCellDef> Accion </th>
                     <td mat-cell *matCellDef="let element" class="action-link"> 
-                      <a (click)="change(element.id)">Edit</a> | 
-                      <a style="color: red;" (click)="deleteUser(element.id)">Delete</a> | 
-                      <a style="color: black;" (click)="projects(element.id)">Proyectos</a>
+                      <a (click)="change(element.id)" id= "cambio">Edit</a> | 
+                      <a style="color: red;" (click)="deleteUser(element.id)" id="borrar">Delete</a> | 
+                      <a style="color: black;" (click)="projects(element.id)" id="proyectos">Proyectos</a>
                     </td>  
                 </ng-container>
             

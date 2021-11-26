@@ -28,7 +28,8 @@ export class DialogErrorLogin {
 export class LoginComponent implements OnInit {
   
   public form!: FormGroup;
-  public prueba: any[] = []
+  public prueba: any[] = [];
+  public test: any = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit {
 
  onSubmit(values: any){
   this.loginService.login(values.user, values.password).then((data: any) => {
+    this.test = data;
     if (data) { 
      // console.log(data)
       localStorage.setItem('acces_token', data.access_token);
@@ -63,6 +65,6 @@ export class LoginComponent implements OnInit {
  }
 
  recover_password(){
-
+  this.test = true;
  }
 }

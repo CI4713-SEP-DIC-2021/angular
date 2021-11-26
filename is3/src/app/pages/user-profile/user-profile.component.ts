@@ -108,6 +108,7 @@ export class UserProfileComponent implements OnInit {
   role!: string;
   password!: string;
   aux= "";
+  test: any = "";
   constructor(private UserProfileService: UserProfileService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -153,6 +154,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   change(id: string){
+    this.test = "true2"
     if((this.userRole === 'Product Owner') || (this.userRole === 'Scrum Master')){
       //console.log("soy el rol")
       //console.log(rol)
@@ -185,6 +187,7 @@ export class UserProfileComponent implements OnInit {
     this.UserProfileService.getProjects(id).then((result: any) => {
       if (result) { 
         //console.log(result);
+        this.test = result
         this.projectsList = result;
         for (var index1 in this.projectsList) {
           //console.log(index1)
@@ -211,6 +214,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   deleteUser(id: string){
+    this.test = "true1"
     if((this.userRole === 'Product Owner') || (this.userRole === 'Scrum Master')){
 
       var index = this.userList.findIndex((user: { id: string; }) => user.id === id);
