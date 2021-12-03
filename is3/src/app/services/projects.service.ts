@@ -26,6 +26,26 @@ export class ProjectsService {
     );
   }
 
+  /**
+   * getAllProjects
+   * Gets all of the projects
+   * @returns response of the operation
+   */
+  getAllProjects() {
+    return this.http.get(`${this.url}/projects/getall`)
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response)
+        return response;
+      },
+        (error) => {
+          console.log(error);
+          return [];
+        }
+    )
+  }
+
 
   create(project: any) {
     const headers = new HttpHeaders({

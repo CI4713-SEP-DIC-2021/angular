@@ -41,12 +41,12 @@ export class ProjectsComponent implements OnInit {
   ngOnInit(): void {
     this.current_user_id = this.loginService.getCurrentID();
 
-    this.projectService.getAllByUser(this.current_user_id).then((projects: any) => {
+    //this.projectService.getAllByUser(this.current_user_id).then((projects: any) => {
+    this.projectService.getAllProjects().then((projects: any) => {
       var is_array = Array.isArray(projects);
       if (is_array) { 
         this.projectsList = projects;
       } 
-      console.log(this.projectsList);
     });
   }
 
