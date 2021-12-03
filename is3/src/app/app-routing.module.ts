@@ -6,6 +6,7 @@ import { ProjectsComponent } from './pages/projects/projects.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { EventsComponent } from './pages/events/events.component';
 import { ProductBacklogComponent } from './pages/product-backlog/product-backlog.component';
+import { SprintBacklogComponent } from './pages/sprint-backlog/sprint-backlog.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'historias/:id',
     component: ProductBacklogComponent,
+  },
+  {
+    path: 'sprints/:id',
+    component: SprintBacklogComponent,
   },
 ];
 

@@ -39,6 +39,13 @@ import { ProductBacklogComponent } from './pages/product-backlog/product-backlog
 import { AddStoryComponent } from './pages/product-backlog/dialogs/add-story/add-story.component';
 import { EditStoryComponent } from './pages/product-backlog/dialogs/edit-story/edit-story.component';
 import { DeleteStoryComponent } from './pages/product-backlog/dialogs/delete-story/delete-story.component';
+import { SprintBacklogComponent } from './pages/sprint-backlog/sprint-backlog.component';
+import { AddCriteriaComponent } from './pages/sprint-backlog/dialogs/add-criteria/add-criteria.component';
+import { EditCriteriaComponent } from './pages/sprint-backlog/dialogs/edit-criteria/edit-criteria.component';
+import { DeleteCriteriaComponent } from './pages/sprint-backlog/dialogs/delete-criteria/delete-criteria.component';
+import { EditTestComponent } from './pages/sprint-backlog/dialogs/edit-test/edit-test.component';
+import { AddTestComponent } from './pages/sprint-backlog/dialogs/add-test/add-test.component';
+import { DeleteTestComponent } from './pages/sprint-backlog/dialogs/delete-test/delete-test.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +62,13 @@ import { DeleteStoryComponent } from './pages/product-backlog/dialogs/delete-sto
     AddStoryComponent,
     EditStoryComponent,
     DeleteStoryComponent,
+    SprintBacklogComponent,
+    AddCriteriaComponent,
+    EditCriteriaComponent,
+    DeleteCriteriaComponent,
+    EditTestComponent,
+    AddTestComponent,
+    DeleteTestComponent,
   ],
   imports: [
     BrowserAnimationsModule,

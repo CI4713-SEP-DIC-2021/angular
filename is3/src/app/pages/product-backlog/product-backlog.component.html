@@ -90,7 +90,7 @@
 
 
                 <!-- Selected user story -->
-                <mat-checkbox style="margin-left: 100px"></mat-checkbox>
+                <mat-checkbox *ngIf="element.parent_id == null" [checked]="selected_checkbox === element.id" (change)="selected_checkbox = element.id" style="margin-left: 100px"></mat-checkbox>
 
             </td>
           </ng-container>
@@ -98,7 +98,12 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-      </div>  
+      </div> 
+      
+      <button mat-raised-button [disabled]="selected_checkbox == -1" [routerLink]="['/sprints', selected_checkbox]" class="generate-button">
+        Generar
+      </button>
+
     </mat-card>
     
   <app-footer></app-footer>

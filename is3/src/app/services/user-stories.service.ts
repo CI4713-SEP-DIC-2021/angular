@@ -162,4 +162,25 @@ export class UserStoriesService {
 
   }
 
+
+  /**
+   * searchStoryByID
+   * Gets the user story of the give ID
+   * @param storyId Id of the user story
+   * @returns The user story of the given ID
+   */
+   searchStoryByID(storyId: number) {
+    return this.http.get(`${this.url}/stories/search/${storyId}`)
+    .toPromise()
+    .then(
+      (response) => {
+        return response;
+    },
+      (error) => {
+        console.log(error);
+        return [];
+      }
+    );
+  }
+
 }

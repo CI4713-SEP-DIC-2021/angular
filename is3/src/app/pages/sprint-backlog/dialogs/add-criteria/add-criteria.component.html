@@ -1,0 +1,24 @@
+<!-- Add new criteria dialog -->
+<div style="width: 500px">
+    <h2 mat-dialog-title>Agregar Criterio de Aceptación</h2>
+    <mat-divider></mat-divider>
+
+    <!-- Form -->
+    <mat-dialog-content>
+        <form [formGroup]="criteriaForm">
+            <!-- User story criteria -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Criterio de aceptación</mat-label>
+                <input formControlName="description" placeholder="Introduce un nuevo criterio de aceptación" matInput>
+                <mat-error *ngIf="displayError('description')">Debe introducir un criterio de aceptación</mat-error>
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+
+    <!-- Add button -->
+    <mat-dialog-actions style="justify-content: center">
+        <button [disabled]="criteriaForm.invalid" mat-button class="add-button" (click)="addCriteria()">
+            Agregar
+        </button>
+    </mat-dialog-actions>
+</div>

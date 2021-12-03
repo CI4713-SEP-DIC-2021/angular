@@ -1,0 +1,14 @@
+<!-- Delete acceptance test dialog -->
+<h2 mat-dialog-title>Eliminar prueba de aceptación</h2>
+<mat-divider></mat-divider>
+
+<mat-dialog-content class="dialog">
+    <mat-card-subtitle style="font-size: 16px">¿Estás seguro que deseas borrar la prueba de aceptación seleccionada? 
+        <br/> No podrás revertir esta acción.
+    </mat-card-subtitle>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions">
+    <button mat-button class="cancel-button" (click)="closeDialog()">Cancelar</button>
+    <button mat-button class="delete-button" (click)="deleteTest()">Eliminar</button>
+</mat-dialog-actions>
