@@ -1,0 +1,95 @@
+<div class="fondo">
+    <app-sidebar></app-sidebar>
+    <mat-card *ngIf = "!ready && !image && !identification" style="width: 25%; margin: 0 auto; margin-top: 30px; height: 35rem; text-align: center">
+        <mat-card-title >Documentos de proyectos</mat-card-title>
+        <mat-divider style="margin-top: 10px"></mat-divider>
+
+        <mat-form-field appearance="fill" style="margin-top: 20%;">
+            <mat-label>Selecciona el proyecto</mat-label>
+            <mat-select [(value)]="selectedProy">
+                <mat-option *ngFor="let proy of projectsList" [value]="proy.id">
+                    {{proy.description}}
+                  </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="margin-top: 5%;">
+            <mat-label>Selecciona el documento</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option value="Cesión de Derechos de Autor">Cesión de Derechos de Autor</mat-option>
+              <mat-option value="Introducción">Introducción</mat-option>
+              <mat-option value="Propósito de este documento">Propósito de este documento</mat-option>
+              <mat-option value="Motivación">Motivación</mat-option>
+              <mat-option value="Estado del Proyecto">Estado del Proyecto</mat-option>
+              <mat-option value="Alcance">Alcance</mat-option>
+              <mat-option value="Fundamentación">Fundamentación</mat-option>
+              <mat-option value="Valores del equipo">Valores del equipo</mat-option>
+
+              <mat-option value="Arquitectura del Software">Arquitectura del Software</mat-option>
+              <mat-option value="Diagrama de Clases">Diagrama de Clases</mat-option>
+
+              <mat-option value="Identificación del Proyecto">Identificación del Proyecto</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <button mat-button class="add-button" style="margin-top: 5%;" (click)="search()"> Ver documento
+            <mat-icon matSuffix>search</mat-icon>
+          </button>
+    </mat-card>
+    <mat-card *ngIf = "ready" style="width: 50%; margin: 0 auto; margin-top: 30px; height: 35rem; text-align: center">
+        <mat-card-title >{{selected}}</mat-card-title>
+        <mat-divider style="margin-top: 10px"></mat-divider>
+
+        <mat-form-field  class = "ejemplo-full-width" style="margin-top: 12%;" apariencia = "fill" > 
+            <mat-label >Informacion </mat-label > 
+            <textarea [(ngModel)]="input2" style="height: 265px;" matInput >{{text}}</textarea > 
+        </mat-form-field > 
+        <br>
+        <button mat-button class="add-button" style="margin-top: 5%;" (click)="save()"> Guardar
+            <mat-icon matSuffix>save</mat-icon>
+          </button>
+    </mat-card>
+
+    <mat-card *ngIf = "image" style="width: 50%; margin: 0 auto; margin-top: 30px; height: 35rem; text-align: center">
+        <mat-card-title >{{selected}}</mat-card-title>
+        <mat-divider style="margin-top: 10px"></mat-divider>
+
+        <input type="file" style="margin-top: 12%;" name="image" (change)="onFileSelected($event)"> 
+        <br>
+        <img id="image" style="margin-top: 5%;" src= uploadedImage alt="Agrega una imagen" width=70% height="265">
+        <br>
+        <button mat-button class="add-button" style="margin-top: 5%;" (click)="saveImage()"> Guardar
+            <mat-icon matSuffix>save</mat-icon>
+          </button>
+    </mat-card>
+
+    <mat-card *ngIf = "identification" style="width: 50%; margin: 0 auto; margin-top: 30px; height: 35rem; text-align: center">
+        <mat-card-title >{{selected}}</mat-card-title>
+        <mat-divider style="margin-top: 10px"></mat-divider>
+
+        <mat-form-field  class = "ejemplo-full-width" style="margin-top: 2%;" apariencia = "fill" > 
+            <mat-label >Nombre </mat-label > 
+            <textarea [(ngModel)]="input3" style="height: 38px;" matInput >{{text}}</textarea > 
+        </mat-form-field > 
+        <br>
+        <mat-form-field  class = "ejemplo-full-width" style="margin-top: 2%;" apariencia = "fill" > 
+            <mat-label >Método de Desarrollo </mat-label > 
+            <textarea [(ngModel)]="input4" style="height: 38px;" matInput >{{text}}</textarea > 
+        </mat-form-field >
+        <br>
+        <mat-form-field  class = "ejemplo-full-width" style="margin-top: 2%;" apariencia = "fill" > 
+            <mat-label >Versión </mat-label > 
+            <textarea [(ngModel)]="input5" style="height: 38px;" matInput >{{text}}</textarea > 
+        </mat-form-field >
+        <br>
+        <input type="file" style="margin-top: 2%;" name="image2" (change)="onFileSelected2($event)"> 
+        <br>
+        <img id="image2" style="margin-top: 2%;" alt="Agrega la Metáfora del Proyecto" width=35% height="118">
+        <br>
+        <br>
+        <button mat-button class="add-button" style="margin-top: 2%;" (click)="saveId()" > Guardar
+            <mat-icon matSuffix>save</mat-icon>
+        </button>
+    </mat-card>
+    
+    <app-footer></app-footer>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 // Components
 import { AddProjectComponent } from './dialogs/add-project/add-project.component';
@@ -35,7 +36,8 @@ export class ProjectsComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private projectService: ProjectsService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -132,5 +134,9 @@ export class ProjectsComponent implements OnInit {
       }
       console.log(this.projectsList);
     });
+  }
+
+  projectsDocuments(){
+    this.router.navigate(["/projects-documents"])
   }
 }

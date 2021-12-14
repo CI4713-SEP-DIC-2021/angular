@@ -11,6 +11,20 @@ export class ProjectsService {
 
   constructor(private http: HttpClient, private loginService: LoginService) { }
 
+  getAll() {
+    return this.http.get(`${this.url}/projects/all`)
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response)
+        return response;
+    },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   getAllByUser(userId: number) {
     return this.http.get(`${this.url}/projects/getall/${userId}`)
     .toPromise()

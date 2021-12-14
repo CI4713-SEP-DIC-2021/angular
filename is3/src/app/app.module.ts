@@ -39,6 +39,7 @@ import { ProductBacklogComponent } from './pages/product-backlog/product-backlog
 import { AddStoryComponent } from './pages/product-backlog/dialogs/add-story/add-story.component';
 import { EditStoryComponent } from './pages/product-backlog/dialogs/edit-story/edit-story.component';
 import { DeleteStoryComponent } from './pages/product-backlog/dialogs/delete-story/delete-story.component';
+import { ProjectsDocumentsComponent } from './pages/projects-documents/projects-documents.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { DeleteStoryComponent } from './pages/product-backlog/dialogs/delete-sto
     AddStoryComponent,
     EditStoryComponent,
     DeleteStoryComponent,
+    ProjectsDocumentsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
