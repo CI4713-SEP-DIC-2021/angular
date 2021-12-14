@@ -1,0 +1,177 @@
+<div class="fondo">
+    <app-sidebar></app-sidebar>
+
+  <!-- Sprint Backlog Card -->
+  <mat-card style="width: 70%; margin: 0 auto; margin-top: 30px; height: 35rem; overflow: scroll;">
+      <mat-card-title>Sprint Backlog</mat-card-title>
+      <mat-divider style="margin-top: 10px"></mat-divider>
+    
+      <mat-card-subtitle style="font-weight: bold; margin-top: 40px;">Historias de Usuario</mat-card-subtitle>  
+
+      <div class="example-table-container">
+        <!-- Table of user stories -->
+        <table mat-table *ngIf="storiesList" [dataSource]="storiesList" class="mat-elevation-z8" style="width: 100%">
+        
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id. </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.parent_id == null ? '#F0F0F0':''}"> {{element.id}} </td>
+          </ng-container>
+
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Historias de Usuario </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.parent_id == null ? '#F0F0F0':''}"> {{ element.description }} </td>
+          </ng-container>
+
+          <!-- Épica -->
+          <ng-container matColumnDef="epica">
+            <th mat-header-cell *matHeaderCellDef> Épica </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.parent_id == null ? '#F0F0F0':''}">
+              <mat-checkbox [disabled]="true" [checked]="element.epic"></mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Priority column -->
+          <ng-container matColumnDef="priority">
+            <th mat-header-cell *matHeaderCellDef> Prioridad </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.parent_id == null ? '#F0F0F0':''}">
+
+              <mat-form-field appearance="outline" style="width: 100px; height: 60px">
+                <mat-select [value]="element.priority" [disabled]="true">
+                  <mat-option value="high">Alta</mat-option>
+                  <mat-option value="medium">Media</mat-option>
+                  <mat-option value="low">Baja</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <!-- Add Column -->
+          <ng-container matColumnDef="add">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': element.parent_id == null ? '#F0F0F0':''}">
+                <!-- Add criteria -->
+                <button mat-icon-button [disabled]="current_user_role != 'Scrum Team'" (click)="addCriteriaDialog(element.id)">
+                    <mat-icon>add_circle_outline</mat-icon>
+                    Criterio
+                </button>
+
+                <!-- Add acceptance test -->
+                <button mat-icon-button [disabled]="current_user_role != 'Product Owner'" (click)="addTestDialog(element.id)" style="margin-left: 50px">
+                  <mat-icon>add_circle_outline</mat-icon>
+                  Prueba
+                </button>
+            </td>
+          </ng-container>
+        
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsStories"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsStories;"></tr>
+        </table>
+      </div>
+
+
+      <!-- Table: Criterios de Aceptación -->
+      <mat-card-subtitle style="font-weight: bold; margin-top: 40px;">Criterios de aceptación</mat-card-subtitle>  
+
+      <div class="example-table-container">
+        <!-- Table of criteria -->
+        <table mat-table *ngIf="criteriaList" [dataSource]="criteriaList" class="mat-elevation-z8" style="width: 100%">
+        
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id. </th>
+            <td mat-cell *matCellDef="let element"> {{element.story.id + "." + element.id}} </td>
+          </ng-container>
+
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Criterios de aceptación </th>
+            <td mat-cell *matCellDef="let element"> {{ element.description }} </td>
+          </ng-container>
+
+          <!-- Approved Column -->
+          <ng-container matColumnDef="approved">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-checkbox [checked]="element.approved" (change)="changeApprovedStatus(element)"></mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element">
+                <!-- Edit criteria -->
+                <button mat-icon-button [disabled]="current_user_role != 'Scrum Team'" (click)="editCriteriaDialog(element)" style="margin-right: 30px">
+                    <mat-icon>edit</mat-icon>
+                </button>
+
+                <!-- Delete criteria -->
+                <button mat-icon-button [disabled]="current_user_role != 'Scrum Team'" (click)="deleteCriteriaDialog(element.id)">
+                  <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+        
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsCriteria"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsCriteria;"></tr>
+        </table>
+      </div>
+
+
+      <!-- Table: Pruebas de Aceptación -->
+      <mat-card-subtitle style="font-weight: bold; margin-top: 40px;">Pruebas de aceptación</mat-card-subtitle>  
+
+      <div class="example-table-container">
+        <!-- Table of acceptance tests -->
+        <table mat-table *ngIf="testsList" [dataSource]="testsList" class="mat-elevation-z8" style="width: 100%">
+        
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id. </th>
+            <td mat-cell *matCellDef="let element"> {{element.story.id + "." + element.id}} </td>
+          </ng-container>
+
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Pruebas de aceptación </th>
+            <td mat-cell *matCellDef="let element"> {{ element.description }} </td>
+          </ng-container>
+
+          <!-- Approved Column -->
+          <ng-container matColumnDef="approved">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-checkbox [checked]="element.approved" (change)="changeStatusTests(element)"></mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element">
+                <!-- Edit acceptance tests -->
+                <button mat-icon-button [disabled]="current_user_role != 'Product Owner'" (click)="editTestDialog(element)" style="margin-right: 30px">
+                    <mat-icon>edit</mat-icon>
+                </button>
+
+                <!-- Delete aceptance tests -->
+                <button mat-icon-button [disabled]="current_user_role != 'Product Owner'" (click)="deleteTestDialog(element.id)">
+                  <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+        
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsTests"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsTests;"></tr>
+        </table>
+      </div>
+
+    </mat-card>
+    
+  <app-footer></app-footer>
+</div>

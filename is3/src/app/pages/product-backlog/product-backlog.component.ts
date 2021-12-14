@@ -25,6 +25,8 @@ export class ProductBacklogComponent implements OnInit {
 
   search_input!: string;    // input search
 
+  selected_checkbox = -1;   // Indicates the checkbox that's currently selected (generate sprint backlog)
+
   constructor(
     private route: ActivatedRoute,
     private loginService: LoginService,
@@ -45,8 +47,7 @@ export class ProductBacklogComponent implements OnInit {
 
         // Organize the stories:
         this.organizeStories();
-      } 
-      console.log(this.userStoriesList);
+      }
     });
 
 

@@ -22,6 +22,14 @@
     background-color: rgb(240, 240, 240);
 }
 
+.generate-button {
+    background-color: #05b322;
+    color: white;
+    border-radius: 9999px;
+    margin-top: 20px; 
+    float: right;
+}
+
 
 // Changing the color of the mat-form-field
 ::ng-deep {

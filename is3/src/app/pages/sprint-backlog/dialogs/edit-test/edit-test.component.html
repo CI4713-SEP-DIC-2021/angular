@@ -1,0 +1,24 @@
+<!-- Edit acceptance test dialog --> 
+<div style="width: 500px">
+    <h2 mat-dialog-title>Editar prueba de aceptación</h2>
+    <mat-divider></mat-divider>
+
+    <!-- Form -->
+    <mat-dialog-content>
+        <form [formGroup]="testsForm">
+            <!-- User story acceptance test (description) -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Prueba de aceptación</mat-label>
+                <input formControlName="description" placeholder="Introduce la descripción de la prueba de aceptación" matInput>
+                <mat-error *ngIf="displayError('description')">Debe introducir una prueba de aceptación</mat-error>
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+
+    <!-- Edit button -->
+    <mat-dialog-actions style="justify-content: center">
+        <button [disabled]="testsForm.invalid" mat-button class="add-button" (click)="editTest()">
+            Guardar
+        </button>
+    </mat-dialog-actions>
+</div>

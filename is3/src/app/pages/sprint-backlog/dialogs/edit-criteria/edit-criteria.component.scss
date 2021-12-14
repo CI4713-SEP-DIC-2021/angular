@@ -1,0 +1,45 @@
+.form-description {
+    width: 80%; 
+    display: block; 
+    margin: 0 auto; 
+    margin-top: 30px
+}
+
+.add-button {
+    //background-color: blueviolet;
+    background-color: #23cf40;
+    color: white;
+    width: 70%;
+    border-radius: 9999px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    transition: width 0.5s;
+}
+
+.add-button:hover {
+    width: 80%
+}
+
+.add-button:disabled,
+.add-button:disabled:hover
+.add-button[disabled]{
+  background-color: #e9e3e3;
+  color: #666666;
+  width: 70%
+}
+
+// Changing the color for the mat-form-field
+::ng-deep {
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+       color: grey;
+    }
+    .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+        color: #23cf40;
+    }
+    .mat-form-field-label {
+        color: grey;
+    }
+    .mat-form-field.mat-focused .mat-form-field-label {
+        color: grey;
+    }
+}
