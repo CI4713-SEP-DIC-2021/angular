@@ -50,6 +50,7 @@ export class ProjectsService {
     .toPromise()
     .then(
       (response) => {
+        console.log('aaaaaaa')
         console.log(response)
         return response;
       },
