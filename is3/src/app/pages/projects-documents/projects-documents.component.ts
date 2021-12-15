@@ -179,9 +179,10 @@ export class ProjectsDocumentsComponent implements OnInit {
             for (var index1 in this.projectsList) {
                 if(this.projectsList[index1].id === parseInt(this.selectedProy)){
                     this.image = true;
+                    var id = parseInt(index1);
                     setTimeout(() => {
                         var imag = <HTMLImageElement>document.getElementById('image');
-                        imag.src = this.base[index1][9];       
+                        imag.src = this.base[id][9];       
                         this.aux = 9;
                     }, 100);
                 }
@@ -206,6 +207,18 @@ export class ProjectsDocumentsComponent implements OnInit {
                     }, 200);
                 }
             }
+        }
+
+        if(this.selected === "Historial de revisiones"){
+            if(!localStorage.hasOwnProperty(this.selectedProy)){
+                localStorage.setItem(this.selectedProy, JSON.stringify([["1","2","3","4"]]));
+            }
+            localStorage.setItem("turno", this.selectedProy);
+            this.router.navigate(["/revision-history"])
+        }
+
+        if(this.selected === "Equipos y roles del proyecto"){
+            this.router.navigate(["/teams-roles"])
         }
 
         if((this.selected != "Diagrama de Clases") &&  this.selected != "Arquitectura del Software" &&  this.selected != "Identificación del Proyecto"){

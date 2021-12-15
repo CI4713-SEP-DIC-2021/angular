@@ -1,0 +1,23 @@
+<h1 mat-dialog-title style="text-align: center;">Ingrese los datos para crear una nueva revisión</h1>
+<div mat-dialog-content style="text-align: center;">
+  <mat-form-field appearance="fill">
+    <mat-label>Fecha</mat-label>
+    <input matInput [(ngModel)]="data.fecha">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Versión</mat-label>
+    <input matInput [(ngModel)]="data.version">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Descripción</mat-label>
+    <input matInput [(ngModel)]="data.descripcion">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Equipos de Desarrollo</mat-label>
+    <input matInput [(ngModel)]="data.equipo">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="justify-content: space-evenly">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="[data.fecha, data.version, data.descripcion, data.equipo]" cdkFocusInitial>Agregar</button>
+</div>

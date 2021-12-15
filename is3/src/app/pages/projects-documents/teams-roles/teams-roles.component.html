@@ -1,0 +1,66 @@
+<div class="fondo">
+    <app-sidebar></app-sidebar>
+  <!-- Projects' Card -->
+  <mat-card style="width: 70%; margin: 0 auto; margin-top: 30px; height: 35rem">
+      <mat-card-title>Equipos y roles del proyecto</mat-card-title>
+      <mat-divider style="margin-top: 10px"></mat-divider>
+    
+      <div style="float: right">
+    
+        <!-- Add project -->
+        <button mat-button class="add-button" style="margin-top: 15px" (click)="add()"> Agregar miembro
+          <mat-icon style="margin-left: 20px">add</mat-icon>
+        </button>
+      </div>
+
+      <div class="example-table-container">
+        <!-- Table of projects -->
+        <table mat-table *ngIf="membersList" [dataSource]="membersList" class="mat-elevation-z8" style="width: 100%;">
+        
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element[0]}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="mail">
+            <th mat-header-cell *matHeaderCellDef> Correo </th>
+            <td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="telefono">
+            <th mat-header-cell *matHeaderCellDef> Telefono </th>
+            <td mat-cell *matCellDef="let element" > {{ element[2]}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="rol">
+            <th mat-header-cell *matHeaderCellDef> Rol </th>
+            <td mat-cell *matCellDef="let element"> {{ element[3]}} </td>
+          </ng-container>
+        
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="width: 350px">  </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+                <span style="margin-right: 55px"></span>
+
+                <!-- Edit-->
+                <button mat-icon-button (click)="edit()" class="action-buttons">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <!-- Delete -->
+                <button mat-icon-button (click)="delete()" class="delete-button">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div> 
+
+    </mat-card>
+    
+  <app-footer></app-footer>
+</div>

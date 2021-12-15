@@ -8,6 +8,8 @@ import { EventsComponent } from './pages/events/events.component';
 import { ProductBacklogComponent } from './pages/product-backlog/product-backlog.component';
 import { ProjectsDocumentsComponent } from './pages/projects-documents/projects-documents.component';
 import { SprintBacklogComponent } from './pages/sprint-backlog/sprint-backlog.component';
+import { RevisionHistoryComponent } from './pages/projects-documents/revision-history/revision-history.component';
+import { TeamsRolesComponent } from './pages/projects-documents/teams-roles/teams-roles.component';
 
 const routes: Routes = [
   {
@@ -47,6 +49,14 @@ const routes: Routes = [
     path: 'sprints/:id',
     component: SprintBacklogComponent,
   },
+  {
+    path: 'revision-history',
+    component: RevisionHistoryComponent,
+  },
+  {
+    path: 'teams-roles',
+    component: TeamsRolesComponent,
+  }
 ];
 
 @NgModule({

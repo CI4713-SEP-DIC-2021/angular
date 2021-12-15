@@ -47,6 +47,9 @@ import { DeleteCriteriaComponent } from './pages/sprint-backlog/dialogs/delete-c
 import { EditTestComponent } from './pages/sprint-backlog/dialogs/edit-test/edit-test.component';
 import { AddTestComponent } from './pages/sprint-backlog/dialogs/add-test/add-test.component';
 import { DeleteTestComponent } from './pages/sprint-backlog/dialogs/delete-test/delete-test.component';
+import { RevisionHistoryComponent } from './pages/projects-documents/revision-history/revision-history.component';
+import { addReviewDialog, editReviewDialog, deleteReviewDialog } from './pages/projects-documents/revision-history/revision-history.component';
+import { TeamsRolesComponent } from './pages/projects-documents/teams-roles/teams-roles.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +74,11 @@ import { DeleteTestComponent } from './pages/sprint-backlog/dialogs/delete-test/
     EditTestComponent,
     AddTestComponent,
     DeleteTestComponent,
+    RevisionHistoryComponent,
+    addReviewDialog,
+    editReviewDialog,
+    deleteReviewDialog,
+    TeamsRolesComponent,
   ],
   imports: [
     BrowserAnimationsModule,
