@@ -1,0 +1,51 @@
+<!-- Edit team member dialog -->
+<div style="width: 500px">
+    <h2 mat-dialog-title>Editar miembro de equipo</h2>
+    <mat-divider></mat-divider>
+
+    <!-- Form -->
+    <mat-dialog-content>
+        <form [formGroup]="membersForm">
+
+            <!-- Name of the team -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Nombre del Equipo</mat-label>
+                <input formControlName="team_name" placeholder="Introduce el nombre del equipo" matInput>
+            </mat-form-field>
+
+            <mat-divider></mat-divider>
+            
+            <!-- Name of the member -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Nombre</mat-label>
+                <input formControlName="name" placeholder="Introduce el nombre del usuario" matInput>
+            </mat-form-field>
+
+            <!-- Email of the member -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" placeholder="Introduce el email del usuario" matInput>
+            </mat-form-field>
+
+            <!-- Phone number of the member -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Teléfono</mat-label>
+                <input formControlName="phone_number" placeholder="Introduce el teléfono del usuario" matInput>
+            </mat-form-field>
+
+            <!-- Role of the member -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Rol</mat-label>
+                <input formControlName="role" placeholder="Introduce el rol del usuario" matInput>
+            </mat-form-field>
+
+        </form>
+    </mat-dialog-content>
+
+    <!-- Add button -->
+    <mat-dialog-actions style="justify-content: center">
+        <button mat-button class="add-button" (click)="editTeamMember()">
+            Guardar
+        </button>
+    </mat-dialog-actions>
+</div>

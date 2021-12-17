@@ -10,7 +10,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  current_id: any;    // ID of current user
+  current_id: any;    // ID of current user 
 
   login(username2: string, password2: string) {
     return this.http.post(`${this.url}/user/login`, {username: username2, password: password2})

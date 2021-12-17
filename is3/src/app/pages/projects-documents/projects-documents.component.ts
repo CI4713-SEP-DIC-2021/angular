@@ -41,7 +41,8 @@ export class ProjectsDocumentsComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.projectService.getAll().then((projects: any) => {
+        this.projectService.getAllProjects().then((projects: any) => {
+        //this.projectService.getAll().then((projects: any) => { 
             if (projects) { 
               this.projectsList = projects;
               if(!localStorage.hasOwnProperty("data")){
@@ -218,6 +219,7 @@ export class ProjectsDocumentsComponent implements OnInit {
         }
 
         if(this.selected === "Equipos y roles del proyecto"){
+            localStorage.setItem("current-teams-roles-project", this.selectedProy);
             this.router.navigate(["/teams-roles"])
         }
 

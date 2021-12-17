@@ -50,6 +50,13 @@ import { DeleteTestComponent } from './pages/sprint-backlog/dialogs/delete-test/
 import { RevisionHistoryComponent } from './pages/projects-documents/revision-history/revision-history.component';
 import { addReviewDialog, editReviewDialog, deleteReviewDialog } from './pages/projects-documents/revision-history/revision-history.component';
 import { TeamsRolesComponent } from './pages/projects-documents/teams-roles/teams-roles.component';
+import { AddMemberComponent } from './pages/projects-documents/teams-roles/dialogs/add-member/add-member.component';
+import { EditMemberComponent } from './pages/projects-documents/teams-roles/dialogs/edit-member/edit-member.component';
+import { DeleteMemberComponent } from './pages/projects-documents/teams-roles/dialogs/delete-member/delete-member.component';
+import { AddTeamComponent } from './pages/projects-documents/teams-roles/dialogs/add-team/add-team.component';
+import { AddTeamMemberComponent } from './pages/projects-documents/teams-roles/dialogs/add-team-member/add-team-member.component';
+import { EditTeamMemberComponent } from './pages/projects-documents/teams-roles/dialogs/edit-team-member/edit-team-member.component';
+import { DeleteTeamMemberComponent } from './pages/projects-documents/teams-roles/dialogs/delete-team-member/delete-team-member.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +86,13 @@ import { TeamsRolesComponent } from './pages/projects-documents/teams-roles/team
     editReviewDialog,
     deleteReviewDialog,
     TeamsRolesComponent,
+    AddMemberComponent,
+    EditMemberComponent,
+    DeleteMemberComponent,
+    AddTeamComponent,
+    AddTeamMemberComponent,
+    EditTeamMemberComponent,
+    DeleteTeamMemberComponent,
   ],
   imports: [
     BrowserAnimationsModule,

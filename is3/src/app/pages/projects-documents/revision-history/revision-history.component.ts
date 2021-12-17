@@ -83,7 +83,7 @@ export class RevisionHistoryComponent implements OnInit {
   
     ngOnInit(): void {
       /*let x
-      x = this.router.getCurrentNavigation();
+      x = this.router.getCurrentNavigation(); 
       this.id = x?.extras.state!.turno;*/
       this.id = localStorage.getItem("turno");
       var z: any;

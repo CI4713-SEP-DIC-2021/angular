@@ -30,6 +30,14 @@
     float: right;
 }
 
+.teams-title {
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    background-color: rgb(233, 231, 231); 
+    font-size: 15px;
+    text-align: center;
+}
+
 
 // Changing the color of the mat-form-field
 ::ng-deep {

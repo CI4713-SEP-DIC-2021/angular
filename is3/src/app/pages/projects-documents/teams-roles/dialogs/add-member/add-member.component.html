@@ -1,0 +1,41 @@
+<!-- Add member dialog -->
+<div style="width: 500px">
+    <h2 mat-dialog-title>Nuevo miembro</h2>
+    <mat-divider></mat-divider>
+
+    <!-- Form -->
+    <mat-dialog-content>
+        <form [formGroup]="membersForm">
+            
+            <!-- Username of the member -->
+            <mat-form-field appearance="outline" class="form-description">
+                <mat-label>Miembro</mat-label>
+                <mat-select name="member" formControlName="username">
+                    <mat-option *ngFor="let user of usersList" [value]="user.username">
+                        {{user.username}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Email of the member -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" placeholder="Introduce el email del usuario" matInput>
+            </mat-form-field>
+
+            <!-- Phone number of the member -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Teléfono</mat-label>
+                <input formControlName="phone_number" placeholder="Introduce el teléfono del usuario" matInput>
+            </mat-form-field>
+
+        </form>
+    </mat-dialog-content>
+
+    <!-- Add button -->
+    <mat-dialog-actions style="justify-content: center">
+        <button mat-button class="add-button" (click)="addMember()">
+            Agregar miembro
+        </button>
+    </mat-dialog-actions>
+</div>
