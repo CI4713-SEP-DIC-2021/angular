@@ -36,7 +36,7 @@ describe('LoggerService using HttpClientTestingModule', () => {
     req.flush(LOGGERS);
   });
 
-  it('should create a new project', (done) => {
+  it('should delete a specific log', (done) => {
     const logger = LOGGERS[0];
     const loggerID = logger.id;
 
