@@ -69,7 +69,10 @@ export class TeamsRolesComponent implements OnInit {
      * Opens dialog and adds a new member to the project
      */
     addMember() {
-      this.dialog.open(AddMemberComponent).afterClosed().subscribe(response => {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.data = { members: this.membersList }
+
+      this.dialog.open(AddMemberComponent, dialogConfig).afterClosed().subscribe(response => {
         if (response) {
           this.membersList.push(response);
           localStorage.setItem(this.member_endpoint, JSON.stringify(this.membersList));
@@ -143,7 +146,10 @@ export class TeamsRolesComponent implements OnInit {
      * Adds a new member to a given team
      */
     addTeamMember(teamIndex: any) {
-      this.dialog.open(AddTeamMemberComponent).afterClosed().subscribe(response => {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.data = { members: this.teamsList[teamIndex].members }
+
+      this.dialog.open(AddTeamMemberComponent, dialogConfig).afterClosed().subscribe(response => {
         if (response) {
           this.teamsList[teamIndex].members.push(response);
           localStorage.setItem(this.teams_endpoint, JSON.stringify(this.teamsList));

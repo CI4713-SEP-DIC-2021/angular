@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 
 @Component({
@@ -12,6 +12,7 @@ export class AddTeamMemberComponent implements OnInit {
 
   token!: any;
   usersList = [] as any;
+  members = [];
 
   membersForm = this.formBuilder.group({
     username: [''],
@@ -22,8 +23,9 @@ export class AddTeamMemberComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userProfileService: UserProfileService,
-    private dialogRef: MatDialogRef<AddTeamMemberComponent>
-  ) { }
+    private dialogRef: MatDialogRef<AddTeamMemberComponent>,
+    @Inject(MAT_DIALOG_DATA) data: any
+  ) { this.members = data.members }
 
   ngOnInit(): void {
     // Get all users 
@@ -31,6 +33,20 @@ export class AddTeamMemberComponent implements OnInit {
     this.userProfileService.getAll(this.token).then((users: any) => {
       if (users) { 
         this.usersList = users.users;
+
+        // Checks if the user is already a part of the team
+        for (let x of this.members) {
+          let index = 0;
+          let member: any = x;
+          for (let i of this.usersList) {
+            let element: any = i;
+            if (member.username == element.username) {
+              this.usersList.splice(index, 1);
+              break;
+            }
+            index++;
+          }
+        }
       }
     });
   }

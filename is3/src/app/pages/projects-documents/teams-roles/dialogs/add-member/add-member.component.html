@@ -34,7 +34,7 @@
 
     <!-- Add button -->
     <mat-dialog-actions style="justify-content: center">
-        <button mat-button class="add-button" (click)="addMember()">
+        <button mat-button class="add-button" [disabled]="usersList.length == 0" (click)="addMember()">
             Agregar miembro
         </button>
     </mat-dialog-actions>
