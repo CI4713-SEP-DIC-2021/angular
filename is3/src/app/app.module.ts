@@ -7,11 +7,9 @@ import { AppComponent } from './app.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ComponentsModule } from './components/components.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { UserProfileModule } from './pages/user-profile/user-profile.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 // Components
 import { ProjectsComponent } from './pages/projects/projects.component';
@@ -57,6 +56,11 @@ import { AddTeamComponent } from './pages/projects-documents/teams-roles/dialogs
 import { AddTeamMemberComponent } from './pages/projects-documents/teams-roles/dialogs/add-team-member/add-team-member.component';
 import { EditTeamMemberComponent } from './pages/projects-documents/teams-roles/dialogs/edit-team-member/edit-team-member.component';
 import { DeleteTeamMemberComponent } from './pages/projects-documents/teams-roles/dialogs/delete-team-member/delete-team-member.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { deleteUserDialog, editUserDialog, projectsUserDialog, SignUpDialog, UserProfileComponent } from './pages/user-profile/user-profile.component';
+import {APP_BASE_HREF} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -93,6 +97,14 @@ import { DeleteTeamMemberComponent } from './pages/projects-documents/teams-role
     AddTeamMemberComponent,
     EditTeamMemberComponent,
     DeleteTeamMemberComponent,
+    FooterComponent,
+    NavbarComponent,
+    SidebarComponent,
+    UserProfileComponent, 
+    SignUpDialog, 
+    editUserDialog, 
+    projectsUserDialog, 
+    deleteUserDialog
   ],
   imports: [
     BrowserAnimationsModule,
@@ -101,7 +113,6 @@ import { DeleteTeamMemberComponent } from './pages/projects-documents/teams-role
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    ComponentsModule,
     FontAwesomeModule,
     NgbModule,
     MatToolbarModule,
@@ -119,7 +130,32 @@ import { DeleteTeamMemberComponent } from './pages/projects-documents/teams-role
     MatButtonModule,
     MatRadioModule,
     MatCheckboxModule,
-    UserProfileModule,
+    MatDialogModule,
+  ],
+  exports: [
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    FontAwesomeModule,
+    NgbModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+    MatRadioModule,
+    MatCheckboxModule,
     MatDialogModule,
   ],
   entryComponents: [
@@ -130,6 +166,10 @@ import { DeleteTeamMemberComponent } from './pages/projects-documents/teams-role
       provide: MatDialogRef,
       useValue: {}
     },
+    {
+      provide: APP_BASE_HREF, 
+      useValue: 'app'
+    }
   ],
   bootstrap: [AppComponent]
 })
