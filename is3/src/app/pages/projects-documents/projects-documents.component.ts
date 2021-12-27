@@ -4,6 +4,7 @@ import { faSlidersH } from '@fortawesome/free-solid-svg-icons';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { Router } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { ProjectsDocumentsService } from 'src/app/services/projects-documents.service';
 
 interface proye {
     date_created: string;
@@ -30,7 +31,7 @@ export class ProjectsDocumentsComponent implements OnInit {
     input3!: string;
     input4!: string;
     input5!: string;
-    aux = 0;
+    aux = -1;
     image = false;
     identification = false;
     uploadedImage: any;
@@ -38,6 +39,7 @@ export class ProjectsDocumentsComponent implements OnInit {
     constructor(
         private projectService: ProjectsService,
         private router: Router,
+        private projectsDocumentsService: ProjectsDocumentsService,
     ) { }
 
     ngOnInit(): void {
@@ -98,116 +100,267 @@ export class ProjectsDocumentsComponent implements OnInit {
 
     search(){
         if(this.selected === "Cesión de Derechos de Autor"){
-            for (var index1 in this.projectsList) {
-                if(this.projectsList[index1].id === parseInt(this.selectedProy)){
-                    this.input2 = this.base[index1][0];
-                    this.aux = 0;
+            this.projectsDocumentsService.getAllCopyRight().then((result: any) => {
+                if (result.length != 0) {
+                    for (var index1 in result) {
+                        if(parseInt(result[index1].doc.id) === parseInt(this.selectedProy)){
+                            this.input2 = result[index1].content;
+                            this.aux = 0;
+                        }
+                    }
+                }
+            });
+            if(this.aux != 0){
+                for (var index1 in this.projectsList) {
+                    if(this.projectsList[index1].id === parseInt(this.selectedProy)){
+                        this.input2 = this.base[index1][0];
+                        this.aux = 0;
+                    }
                 }
             }
         }
         if(this.selected === "Introducción"){
-            for (var index1 in this.projectsList) {
-                if(this.projectsList[index1].id === parseInt(this.selectedProy)){
-                    console.log(this.projectsList[index1])
-                    this.input2 = this.base[index1][1];
-                    this.aux = 1;
+            this.projectsDocumentsService.getAllIntro().then((result: any) => {
+                if (result.length != 0) {
+                    for (var index1 in result) {
+                        if(parseInt(result[index1].doc.id) === parseInt(this.selectedProy)){
+                            this.input2 = result[index1].content;
+                            this.aux = 1;
+                        }
+                    }
+                }
+            });
+            if(this.aux != 1){
+                for (var index1 in this.projectsList) {
+                    if(this.projectsList[index1].id === parseInt(this.selectedProy)){
+                        console.log(this.projectsList[index1])
+                        this.input2 = this.base[index1][1];
+                        this.aux = 1;
+                    }
                 }
             }
         }
         if(this.selected === "Propósito de este documento"){
-            for (var index1 in this.projectsList) {
-                if(this.projectsList[index1].id === parseInt(this.selectedProy)){
-                    this.input2 = this.base[index1][2];
-                    this.aux = 2;
+            this.projectsDocumentsService.getAllPurpose().then((result: any) => {
+                console.log("soy el documento")
+                console.log(result)
+                if (result.length != 0) {
+                    for (var index1 in result) {
+                        if(parseInt(result[index1].doc.id) === parseInt(this.selectedProy)){
+                            this.input2 = result[index1].content;
+                            this.aux = 2;
+                        }
+                    }
+                }
+            });
+            if(this.aux != 2){
+                for (var index1 in this.projectsList) {
+                    if(this.projectsList[index1].id === parseInt(this.selectedProy)){
+                        this.input2 = this.base[index1][2];
+                        this.aux = 2;
+                    }
                 }
             }
         }
         if(this.selected === "Motivación"){
-            for (var index1 in this.projectsList) {
-                if(this.projectsList[index1].id === parseInt(this.selectedProy)){
-                    this.input2 = this.base[index1][3];
-                    this.aux = 3;
+            this.projectsDocumentsService.getAllMotivation().then((result: any) => {
+                if (result.length != 0) {
+                    for (var index1 in result) {
+                        if(parseInt(result[index1].doc.id) === parseInt(this.selectedProy)){
+                            this.input2 = result[index1].content;
+                            this.aux = 3;
+                        }
+                    }
+                }
+            });
+            if(this.aux != 3){
+                for (var index1 in this.projectsList) {
+                    if(this.projectsList[index1].id === parseInt(this.selectedProy)){
+                        this.input2 = this.base[index1][3];
+                        this.aux = 3;
+                    }
                 }
             }
         }
         if(this.selected === "Estado del Proyecto"){
-            for (var index1 in this.projectsList) {
-                if(this.projectsList[index1].id === parseInt(this.selectedProy)){
-                    this.input2 = this.base[index1][4];
-                    this.aux = 4;
+            this.projectsDocumentsService.getAllStatus().then((result: any) => {
+                if (result.length != 0) {
+                    for (var index1 in result) {
+                        if(parseInt(result[index1].doc.id) === parseInt(this.selectedProy)){
+                            this.input2 = result[index1].content;
+                            this.aux = 4;
+                        }
+                    }
+                }
+            });
+            if(this.aux != 4){
+                for (var index1 in this.projectsList) {
+                    if(this.projectsList[index1].id === parseInt(this.selectedProy)){
+                        this.input2 = this.base[index1][4];
+                        this.aux = 4;
+                    }
                 }
             }
         }
         if(this.selected === "Alcance"){
-            for (var index1 in this.projectsList) {
-                if(this.projectsList[index1].id === parseInt(this.selectedProy)){
-                    this.input2 = this.base[index1][5];
-                    this.aux = 5;
+            this.projectsDocumentsService.getAllScope().then((result: any) => {
+                if (result.length != 0) {
+                    for (var index1 in result) {
+                        if(parseInt(result[index1].doc.id) === parseInt(this.selectedProy)){
+                            this.input2 = result[index1].content;
+                            this.aux = 5;
+                        }
+                    }
+                }
+            });
+            if(this.aux != 5){
+                for (var index1 in this.projectsList) {
+                    if(this.projectsList[index1].id === parseInt(this.selectedProy)){
+                        this.input2 = this.base[index1][5];
+                        this.aux = 5;
+                    }
                 }
             }
         }
         if(this.selected === "Fundamentación"){
-            for (var index1 in this.projectsList) {
-                if(this.projectsList[index1].id === parseInt(this.selectedProy)){
-                    this.input2 = this.base[index1][6];
-                    this.aux = 6;
+            this.projectsDocumentsService.getAllFoundation().then((result: any) => {
+                if (result.length != 0) {
+                    for (var index1 in result) {
+                        if(parseInt(result[index1].doc.id) === parseInt(this.selectedProy)){
+                            this.input2 = result[index1].content;
+                            this.aux = 6;
+                        }
+                    }
+                }
+            });
+            if(this.aux != 6){
+                for (var index1 in this.projectsList) {
+                    if(this.projectsList[index1].id === parseInt(this.selectedProy)){
+                        this.input2 = this.base[index1][6];
+                        this.aux = 6;
+                    }
                 }
             }
         }
         if(this.selected === "Valores del equipo"){
-            for (var index1 in this.projectsList) {
-                if(this.projectsList[index1].id === parseInt(this.selectedProy)){
-                    this.input2 = this.base[index1][7];
-                    this.aux = 7;
+            this.projectsDocumentsService.getAllValues().then((result: any) => {
+                if (result.length != 0) {
+                    for (var index1 in result) {
+                        if(parseInt(result[index1].doc.id) === parseInt(this.selectedProy)){
+                            this.input2 = result[index1].content;
+                            this.aux = 7;
+                        }
+                    }
+                }
+            });
+            if(this.aux != 7){
+                for (var index1 in this.projectsList) {
+                    if(this.projectsList[index1].id === parseInt(this.selectedProy)){
+                        this.input2 = this.base[index1][7];
+                        this.aux = 7;
+                    }
                 }
             }
         }
         // apartado de imagenes
         if(this.selected === "Arquitectura del Software"){
-            for (var index1 in this.projectsList) {
-                if(this.projectsList[index1].id === parseInt(this.selectedProy)){
-                    this.image = true;
-                    var id = parseInt(index1);
-                    setTimeout(() => {
-                        var imag = <HTMLImageElement>document.getElementById('image');
-                        imag.src = this.base[id][8];
-                        this.aux = 8;
-                    }, 100);
+            this.projectsDocumentsService.getAllArq().then((result: any) => {
+                if (result.length != 0) {
+                    for (var index1 in result) {
+                        if(parseInt(result[index1].doc.id) === parseInt(this.selectedProy)){
+                            this.image = true;
+                            var id = parseInt(index1);
+                            setTimeout(() => {
+                                var imag = <HTMLImageElement>document.getElementById('image');
+                                imag.src = result[id].path;
+                                this.aux = 8;    
+                            }, 200);
+                        }
+                    }
                 }
-            }
+                if(this.image === false){
+                    for (var index1 in this.projectsList) {
+                        if(this.projectsList[index1].id === parseInt(this.selectedProy)){
+                            this.image = true;
+                            var id = parseInt(index1);
+                            setTimeout(() => {
+                                var imag = <HTMLImageElement>document.getElementById('image');
+                                imag.src = this.base[id][8];
+                                this.aux = 8;
+                            }, 100);
+                        }
+                    }
+                }
+            });
         }
         if(this.selected === "Diagrama de Clases"){
-            for (var index1 in this.projectsList) {
-                if(this.projectsList[index1].id === parseInt(this.selectedProy)){
-                    this.image = true;
-                    var id = parseInt(index1);
-                    setTimeout(() => {
-                        var imag = <HTMLImageElement>document.getElementById('image');
-                        imag.src = this.base[id][9];       
-                        this.aux = 9;
-                    }, 100);
+            this.projectsDocumentsService.getAllDiag().then((result: any) => {
+                if (result.length != 0) {
+                    for (var index1 in result) {
+                        if(parseInt(result[index1].doc.id) === parseInt(this.selectedProy)){
+                            this.image = true;
+                            var id = parseInt(index1);
+                            setTimeout(() => {
+                                var imag = <HTMLImageElement>document.getElementById('image');
+                                imag.src = result[id].path;
+                                this.aux = 9;    
+                            }, 200);
+                        }
+                    }
                 }
-            }
+                if(this.image === false){
+                    for (var index1 in this.projectsList) {
+                        if(this.projectsList[index1].id === parseInt(this.selectedProy)){
+                            this.image = true;
+                            var id = parseInt(index1);
+                            setTimeout(() => {
+                                var imag = <HTMLImageElement>document.getElementById('image');
+                                imag.src = this.base[id][9];       
+                                this.aux = 9;
+                            }, 100);
+                        }
+                    }
+                }
+            });
         }
 
         if(this.selected === "Identificación del Proyecto"){
-            for (var index1 in this.projectsList) {
-                if(this.projectsList[index1].id === parseInt(this.selectedProy)){
-                    this.input3 = this.baseId[index1][0];
-                    this.input4 = this.baseId[index1][1];
-                    this.input5 = this.baseId[index1][2];
-                    this.identification = true;
-                    console.log("antes de la imagen")
-                    console.log(this.baseId)
-                    var id = parseInt(index1);
-                    setTimeout(() => {
-                        var imag = <HTMLImageElement>document.getElementById('image2');
-                        imag.src = this.baseId[id][3];  
-                        console.log("estoy aquiiii")
-                       // console.log(this.baseId[id][3])     
-                    }, 200);
+            this.projectsDocumentsService.getAllDocs().then((result: any) => {
+                if (result.length != 0) {
+                    //console.log("si pude entrar lol")
+                    for (var index1 in result) {
+                        if(result[index1].project.id === parseInt(this.selectedProy)){
+                            this.input3 = result[index1].name;
+                            this.input4 = result[index1].dev_met;
+                            this.input5 = result[index1].version;
+                            this.identification = true;
+                            console.log("antes de la imagen")
+                            var id = parseInt(index1);
+                            setTimeout(() => {
+                                var imag = <HTMLImageElement>document.getElementById('image2');
+                                imag.src = result[id].metaphor;  
+                                console.log("estoy aquiiii")
+                               // console.log(this.baseId[id][3])     
+                            }, 200);
+                        }
+                    }
                 }
-            }
+                if(this.identification === false){
+                    for (var index1 in this.projectsList) {
+                        if(this.projectsList[index1].id === parseInt(this.selectedProy)){
+                            this.input3 = this.baseId[index1][0];
+                            this.input4 = this.baseId[index1][1];
+                            this.input5 = this.baseId[index1][2];
+                            this.identification = true;
+                            var id = parseInt(index1);
+                            setTimeout(() => {
+                                var imag = <HTMLImageElement>document.getElementById('image2');
+                                imag.src = this.baseId[id][3];     
+                            }, 200);
+                        }
+                    }
+                }
+            });
         }
 
         if(this.selected === "Historial de revisiones"){
@@ -233,6 +386,79 @@ export class ProjectsDocumentsComponent implements OnInit {
         for (var index1 in this.projectsList) {
             if(this.projectsList[index1].id === parseInt(this.selectedProy)){
                 this.base[index1][this.aux] = this.input2;
+                if(this.aux === 0){
+                    this.projectsDocumentsService.addCopyRight(parseInt(this.selectedProy), this.input2).then((error: any) => {
+                        if (error) { 
+                          //console.log(error);
+                          this.ngOnInit();
+                        }
+                        console.log(error);
+                    });
+                }
+                if(this.aux === 1){
+                    this.projectsDocumentsService.addIntro(parseInt(this.selectedProy), this.input2).then((error: any) => {
+                        if (error) { 
+                          //console.log(error);
+                          this.ngOnInit();
+                        }
+                        console.log(error);
+                    });
+                }
+                if(this.aux === 2){
+                    this.projectsDocumentsService.addPurpose(parseInt(this.selectedProy), this.input2).then((error: any) => {
+                        if (error) { 
+                          //console.log(error);
+                          this.ngOnInit();
+                        }
+                        console.log(error);
+                    });
+                }
+                if(this.aux === 3){
+                    this.projectsDocumentsService.addMotivation(parseInt(this.selectedProy), this.input2).then((error: any) => {
+                        if (error) { 
+                          //console.log(error);
+                          this.ngOnInit();
+                        }
+                        console.log(error);
+                    });
+                }
+                if(this.aux === 4){
+                    this.projectsDocumentsService.addStatus(parseInt(this.selectedProy), this.input2).then((error: any) => {
+                        if (error) { 
+                          //console.log(error);
+                          this.ngOnInit();
+                        }
+                        console.log(error);
+                    });
+                }
+                if(this.aux === 5){
+                    this.projectsDocumentsService.addScope(parseInt(this.selectedProy), this.input2).then((error: any) => {
+                        if (error) { 
+                          //console.log(error);
+                          this.ngOnInit();
+                        }
+                        console.log(error);
+                    });
+                }
+                if(this.aux === 6){
+                    this.projectsDocumentsService.addFoundation(parseInt(this.selectedProy), this.input2).then((error: any) => {
+                        if (error) { 
+                          //console.log(error);
+                          this.ngOnInit();
+                        }
+                        console.log(error);
+                    });
+                }
+                if(this.aux === 7){
+                    this.projectsDocumentsService.addValues(parseInt(this.selectedProy), this.input2).then((error: any) => {
+                        if (error) { 
+                          //console.log(error);
+                          this.ngOnInit();
+                        }
+                        console.log(error);
+                    });
+                }
+                
             }
         }
         localStorage.setItem('data', JSON.stringify(this.base));
@@ -264,6 +490,24 @@ export class ProjectsDocumentsComponent implements OnInit {
                     let z = reader.result as string
                     this.base[num][this.aux] = z;
                     localStorage.setItem('data', JSON.stringify(this.base));
+                    if(this.aux === 8){
+                        this.projectsDocumentsService.addArq(parseInt(this.selectedProy), this.base[num][this.aux]).then((error: any) => {
+                            if (error) { 
+                              //console.log(error);
+                              this.ngOnInit();
+                            }
+                            console.log(error);
+                        });
+                    }
+                    if(this.aux === 9){
+                        this.projectsDocumentsService.addDiag(parseInt(this.selectedProy), this.base[num][this.aux]).then((error: any) => {
+                            if (error) { 
+                              //console.log(error);
+                              this.ngOnInit();
+                            }
+                            console.log(error);
+                        });
+                    }
                 }
             }
         }
@@ -280,11 +524,19 @@ export class ProjectsDocumentsComponent implements OnInit {
                 this.baseId[index1][2] = this.input5;
                 let reader = new FileReader();
                 let num = parseInt(index1);
+                var id = parseInt(index1);
                 reader.readAsDataURL(this.file as Blob);
                 reader.onloadend = () => {
                     let z = reader.result as string
                     this.baseId[num][3] = z;
                     localStorage.setItem('dataId', JSON.stringify(this.baseId));
+                    this.projectsDocumentsService.addId(this.baseId[id][0], this.baseId[id][1], parseFloat(this.baseId[id][2]), parseInt(this.selectedProy), this.baseId[id][3]).then((error: any) => {
+                        if (error) { 
+                          //console.log(error);
+                          this.ngOnInit();
+                        }
+                        console.log(error);
+                    });
                 }
             }
         }

@@ -5,6 +5,30 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { FormsModule } from '@angular/forms';
 
 @Component({
+  selector: 'changePassword',
+  templateUrl: 'changePassword.html',
+})
+export class changePasswordDialog {
+  constructor(
+    public dialogRef: MatDialogRef<changePasswordDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  save(password: string, password2: string){
+    if(password === password2){
+      this.dialogRef.close(password);
+    }  
+    else{
+      alert("Las contraseñas deben ser iguales");
+    }
+  }
+}
+
+@Component({
   selector: 'deleteUser',
   templateUrl: 'deleteUser.html',
 })
@@ -72,6 +96,7 @@ export interface DialogData {
   password: string;
   projectsList: any[];
   aux: string;
+  password2: string;
 }
 
 export interface UserProfile {
@@ -109,7 +134,7 @@ export class UserProfileComponent implements OnInit {
   password!: string;
   aux= "";
   test: any = "";
-  constructor(private UserProfileService: UserProfileService, public dialog: MatDialog) { }
+  constructor(private UserProfileService: UserProfileService, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
     this.token = localStorage.getItem('acces_token');
@@ -230,6 +255,33 @@ export class UserProfileComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if(result){
           this.UserProfileService.delete(this.token, this.user_name).then((error: any) => {
+            if (error) { 
+              //console.log(error);
+              this.ngOnInit();
+            }
+            console.log(error);
+          });
+        }
+      });
+    } 
+  }
+
+  changePassword(id: string) {
+    this.test = "true2"
+    if((this.userRole === 'Product Owner') || (this.userRole === 'Scrum Master')){
+      var index = this.userList.findIndex((user: { id: string; }) => user.id === id);
+      var lista = this.userList[index];
+      this.user_name = lista.username;
+      var password = "";
+      var password2 = "";
+      const dialogRef = this.dialog.open(changePasswordDialog, {
+        width: '400px',
+        data: {user_name: this.user_name, password: password, password2: password2},
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if(result){
+          this.UserProfileService.editPassword(this.token, this.user_name, result).then((error: any) => {
             if (error) { 
               //console.log(error);
               this.ngOnInit();

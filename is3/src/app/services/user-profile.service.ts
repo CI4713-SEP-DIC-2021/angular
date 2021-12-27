@@ -79,4 +79,18 @@ export class UserProfileService {
       }
     );
   }
+
+  editPassword(token: string, username2: string, new_password2: string ){
+    return this.http.post(`${this.url}/user/editPassword`, {username: username2, new_password: new_password2}, {headers: {'Authorization': `Bearer ${token}`}})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response)
+        return response;
+    },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

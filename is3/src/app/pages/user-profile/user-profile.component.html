@@ -55,9 +55,10 @@
                 <ng-container matColumnDef = "edit" > 
                     <th mat-header-cell *matHeaderCellDef> Accion </th>
                     <td mat-cell *matCellDef="let element" class="action-link"> 
-                      <a (click)="change(element.id)" id= "cambio">Edit</a> | 
-                      <a style="color: red;" (click)="deleteUser(element.id)" id="borrar">Delete</a> | 
-                      <a style="color: black;" (click)="projects(element.id)" id="proyectos">Proyectos</a>
+                      <a (click)="change(element.id)" id= "cambio">Editar rol</a> | 
+                      <a style="color: red;" (click)="deleteUser(element.id)" id="borrar">Borrar</a> | 
+                      <a style="color: black;" (click)="projects(element.id)" id="proyectos">Proyectos</a> | 
+                      <a (click)="changePassword(element.id)" id= "cambio_contra">Cambiar contraseña</a>
                     </td>  
                 </ng-container>
             

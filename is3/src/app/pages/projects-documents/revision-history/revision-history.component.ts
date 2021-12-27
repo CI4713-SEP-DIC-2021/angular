@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserStoriesService } from 'src/app/services/user-stories.service';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { ProjectsDocumentsService } from 'src/app/services/projects-documents.service';
 
 export interface DialogData {
   fecha: string;
@@ -74,11 +75,13 @@ export class RevisionHistoryComponent implements OnInit {
     version!: string;
     descripcion!: string;
     equipo!: string;
+    aux_id: any[] = []
     
     constructor(
       private route: ActivatedRoute,
       public dialog: MatDialog,
-      private router: Router
+      private router: Router,
+      private projectsDocumentsService: ProjectsDocumentsService,
     ) { }
   
     ngOnInit(): void {
@@ -90,6 +93,25 @@ export class RevisionHistoryComponent implements OnInit {
       z = localStorage.getItem(this.id);
       this.reviewsList = JSON.parse(z);
 
+      this.projectsDocumentsService.getAllHistory().then((result: any) => {
+        if (result) { 
+          let aux = []
+          let aux2 = []
+          for (let index = 0; index < result.length; index++) {
+            if(parseInt(result[index].doc.id) === parseInt(this.id)){
+              this.aux_id.push(result[index].id)
+              aux.push(result[index].date)
+              aux.push(result[index].version)
+              aux.push(result[index].description)
+              aux.push(result[index].teams)
+              aux2.push(aux)
+            }
+            aux = []
+          }
+          this.reviewsList = aux2
+        }
+        console.log(result);
+      });
     }
   
     displayedColumns: string[] = ['fecha', 'version', 'descripcion', 'equipos', 'actions'];
@@ -103,10 +125,20 @@ export class RevisionHistoryComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if(result){
+          console.log("soy el resultado")
+          console.log(result)
          this.reviewsList.push(result)
          localStorage.setItem(this.id, JSON.stringify(this.reviewsList));
-         this.ngOnInit()
-        }
+         this.projectsDocumentsService.addHistory(parseInt(this.id), result[0], result[1], result[2], result[3]).then((error: any) => {
+            if (error) { 
+              //console.log(error);
+              this.aux_id = []
+              this.ngOnInit();
+            }
+            console.log(error);
+        });
+        //this.ngOnInit()
+          }
       });
   }
   
@@ -125,7 +157,15 @@ export class RevisionHistoryComponent implements OnInit {
          console.log("estoy aqui")
          this.reviewsList[index] = result;
          localStorage.setItem(this.id, JSON.stringify(this.reviewsList));
-         this.ngOnInit()
+         this.projectsDocumentsService.editHistory(parseInt(this.aux_id[index]), result[0], result[1], result[2], result[3]).then((error: any) => {
+          if (error) { 
+            //console.log(error);
+            this.aux_id = []
+            this.ngOnInit();
+          }
+          console.log(error);
+          });
+        // this.ngOnInit()
         }
       });
     }
@@ -140,7 +180,15 @@ export class RevisionHistoryComponent implements OnInit {
         if(result){
           this.reviewsList.splice(index,1);
           localStorage.setItem(this.id, JSON.stringify(this.reviewsList));
-          this.ngOnInit()
+          this.projectsDocumentsService.deleteHistory(parseInt(this.aux_id[index])).then((error: any) => {
+            if (error) { 
+              //console.log(error);
+              this.aux_id = []
+              this.ngOnInit();
+            }
+            console.log(error);
+        });
+          //this.ngOnInit()
         }
       });
     }
