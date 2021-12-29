@@ -1,0 +1,33 @@
+<!-- Add project dialog -->
+<div *ngIf="data?.sprints?.length > 0 else sprintsEmpty" style="width: 500px">
+    <h2 mat-dialog-title>Tipos de reuniones</h2>
+    <mat-divider></mat-divider>
+
+    <div class="sprints-select">
+        <mat-form-field appearance="outline" style="width: 100px; height: 60px">
+            <mat-select [value]="data.sprints[0]" (selectionChange)="selectSprint($event)">
+              <mat-option *ngFor="let sprint of data?.sprints" value="{{sprint.id}}">{{sprint.description}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <mat-dialog-actions class="dialog-actions">
+        <button mat-button [disabled]="!sprintIdSelected" class="btn" (click)="goToPlanningMeeting()">
+            Reunión de planificación
+        </button>
+
+        <button mat-button [disabled]="!sprintIdSelected" class="btn" (click)="goToDailyMeeting()">
+            Reunión técnica diaria
+        </button>
+
+        <button mat-button [disabled]="!sprintIdSelected"  class="btn" (click)="goToRetrospectiveMeeting()">
+            Reunión de restropectiva
+        </button>
+    </mat-dialog-actions>
+</div>
+
+<ng-template #sprintsEmpty>
+    <div style="width: 500px">
+        <h2 mat-dialog-title>No hay sprints para este proyecto</h2>
+    </div>
+</ng-template>

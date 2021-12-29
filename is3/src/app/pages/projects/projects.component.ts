@@ -12,6 +12,8 @@ import { Project } from 'src/app/models/project';
 import { EditProjectComponent } from './dialogs/edit-project/edit-project.component';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { LoginService } from 'src/app/services/login.service';
+import { ShowMeetingComponent } from './dialogs/show-meeting/show-meeting.component';
+import { SprintsService } from 'src/app/services/sprints.service';
 
 const PROJECT_DATA: Project[] = [
   {id: 1, description: 'Proyecto 1', status: 'active'},
@@ -37,7 +39,8 @@ export class ProjectsComponent implements OnInit {
     public dialog: MatDialog,
     private projectService: ProjectsService,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private sprintsService: SprintsService,
   ) { }
 
   ngOnInit(): void {
@@ -93,6 +96,19 @@ export class ProjectsComponent implements OnInit {
     .subscribe(result => {
       this.ngOnInit()
     });
+  }
+
+  showMeetings(projectId = 1) {
+    this.sprintsService.getSprintByProject(projectId).then(sprints => {
+        this.dialog.open(ShowMeetingComponent, {
+          data: {
+            sprints: sprints ? sprints : []}
+        }).afterClosed()
+        .subscribe(result => {
+          this.ngOnInit()
+        });
+      }
+    );
   }
 
   /**

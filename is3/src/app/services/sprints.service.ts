@@ -10,6 +10,26 @@ export class SprintsService {
 
   constructor(private http: HttpClient) { }
 
+    /**
+   * getSprintByProject
+   * Gets the sprints for a specific project id
+   * @param projectId ID of the project to get the sprint
+   * @returns response of the operation
+   */
+    getSprintByProject(projectId: any) {
+      return this.http.get(`${this.url}/sprint/getbyproject/${projectId}`)
+      .toPromise()
+      .then(
+        (response) => {
+          console.log(response)
+          return response;
+      },
+        (error) => {
+          console.log(error);
+          return [];
+        }
+      );
+    }
 
   /**
    * getCriteriaByStory

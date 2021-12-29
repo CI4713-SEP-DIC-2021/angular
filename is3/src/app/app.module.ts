@@ -57,6 +57,11 @@ import { AddTeamComponent } from './pages/projects-documents/teams-roles/dialogs
 import { AddTeamMemberComponent } from './pages/projects-documents/teams-roles/dialogs/add-team-member/add-team-member.component';
 import { EditTeamMemberComponent } from './pages/projects-documents/teams-roles/dialogs/edit-team-member/edit-team-member.component';
 import { DeleteTeamMemberComponent } from './pages/projects-documents/teams-roles/dialogs/delete-team-member/delete-team-member.component';
+import { ShowMeetingComponent } from './pages/projects/dialogs/show-meeting/show-meeting.component';
+import { MeetingsComponent } from './pages/meetings/meetings.component';
+import { PlanningComponent } from './pages/meetings/planning/planning.component';
+import { DailyComponent } from './pages/meetings/daily/daily.component';
+import { RetrospectiveComponent } from './pages/meetings/retrospective/retrospective.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +98,11 @@ import { DeleteTeamMemberComponent } from './pages/projects-documents/teams-role
     AddTeamMemberComponent,
     EditTeamMemberComponent,
     DeleteTeamMemberComponent,
+    ShowMeetingComponent,
+    MeetingsComponent,
+    PlanningComponent,
+    DailyComponent,
+    RetrospectiveComponent,
   ],
   imports: [
     BrowserAnimationsModule,

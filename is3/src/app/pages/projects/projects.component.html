@@ -42,6 +42,10 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef style="width: 350px">  </th>
             <td mat-cell *matCellDef="let element">
+              <!-- Meetings of project -->
+              <button mat-button (click)="showMeetings(element.id)">
+                <mat-icon>meeting_room</mat-icon>
+              </button>
                 <!-- Product backlog of project -->
                 <button mat-icon-button [routerLink]="['/historias', element.id]" class="action-buttons">
                   <mat-icon>library_books</mat-icon>

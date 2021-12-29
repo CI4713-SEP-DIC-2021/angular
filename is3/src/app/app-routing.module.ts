@@ -10,6 +10,7 @@ import { ProjectsDocumentsComponent } from './pages/projects-documents/projects-
 import { SprintBacklogComponent } from './pages/sprint-backlog/sprint-backlog.component';
 import { RevisionHistoryComponent } from './pages/projects-documents/revision-history/revision-history.component';
 import { TeamsRolesComponent } from './pages/projects-documents/teams-roles/teams-roles.component';
+import { MeetingsComponent } from './pages/meetings/meetings.component';
 
 const routes: Routes = [
   {
@@ -56,7 +57,11 @@ const routes: Routes = [
   {
     path: 'teams-roles',
     component: TeamsRolesComponent,
-  }
+  },
+  {
+    path: 'meetings/:type/:sprintId',
+    component: MeetingsComponent,
+  },
 ];
 
 @NgModule({
