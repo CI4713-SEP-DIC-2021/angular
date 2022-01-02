@@ -31,6 +31,37 @@ export class SprintsService {
       );
     }
 
+     getSprintById(sprintId: any) {
+      return this.http.get(`${this.url}/sprint/${sprintId}`)
+      .toPromise()
+      .then(
+        (response) => {
+          console.log(response)
+          return response;
+      },
+        (error) => {
+          console.log(error);
+          return [];
+        }
+      );
+    }
+
+
+    getStoriesBySprint(sprintId: any) {
+      return this.http.get(`${this.url}/sprint/getstories/${sprintId}`)
+      .toPromise()
+      .then(
+        (response) => {
+          console.log(response)
+          return response;
+      },
+        (error) => {
+          console.log(error);
+          return [];
+        }
+      );
+    }
+
   /**
    * getCriteriaByStory
    * Gets the acceptance criteria of a given user story

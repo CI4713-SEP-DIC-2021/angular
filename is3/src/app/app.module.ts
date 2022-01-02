@@ -62,6 +62,8 @@ import { MeetingsComponent } from './pages/meetings/meetings.component';
 import { PlanningComponent } from './pages/meetings/planning/planning.component';
 import { DailyComponent } from './pages/meetings/daily/daily.component';
 import { RetrospectiveComponent } from './pages/meetings/retrospective/retrospective.component';
+import { AddPlanningComponent } from './pages/meetings/planning/add-planning/add-planning.component';
+import { EditPlanningComponent } from './pages/meetings/planning/edit-planning/edit-planning.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +105,8 @@ import { RetrospectiveComponent } from './pages/meetings/retrospective/retrospec
     PlanningComponent,
     DailyComponent,
     RetrospectiveComponent,
+    AddPlanningComponent,
+    EditPlanningComponent,
   ],
   imports: [
     BrowserAnimationsModule,

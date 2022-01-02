@@ -1,5 +1,17 @@
 <div class="fondo">
   <app-sidebar></app-sidebar>
+
+  <ng-container *ngIf="meetingType === 'planning' && sprint">
+    <app-planning [sprint]="sprint" ></app-planning>
+  </ng-container>
+  
+  <ng-container *ngIf="meetingType === 'daily' && sprint">
+    <app-daily></app-daily>
+  </ng-container>
+
+  <ng-container *ngIf="meetingType === 'retrospective' && sprint">
+    <app-retrospective></app-retrospective>
+  </ng-container>
     
   <app-footer></app-footer>
 </div>
