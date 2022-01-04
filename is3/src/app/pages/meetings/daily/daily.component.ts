@@ -12,13 +12,12 @@ import { EditDailyComponent } from './edit-daily/edit-daily.component';
 })
 export class DailyComponent implements OnInit {
   search!: string;    // input search
-  displayedColumns: string[] = ['id', 'subject', 'user_story_id', 'activity', 'assigned', 'actions'];
+  displayedColumns: string[] = ['id', 'date', 'report', 'actions'];
 
   @Input() sprint: any;
 
   meetList = [];
   meetListBase = [];
-  planning: any;
 
   constructor(
     public dialog: MatDialog,
@@ -27,15 +26,10 @@ export class DailyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.meetingService.getAllPlanningBySprint(this.sprint?.id).then((meetings: any) => {
+    this.meetingService.getAllDailiesBySprint(this.sprint?.id).then((meetings: any) => {
       if(meetings) {
-        this.planning = meetings.planning
-        this.meetList = meetings.results
+        this.meetList = meetings
         this.meetListBase = this.meetList;
-      } else {
-        this.meetingService.createPlanning(this.sprint?.id).then((planning: any) => {
-          this.planning = planning
-        });
       }
 
       this.cdr.detectChanges();
@@ -43,7 +37,7 @@ export class DailyComponent implements OnInit {
   }
 
   add() {
-    this.dialog.open(AddDailyComponent, { data: {planningId: this.planning.id, sprintId: this.sprint.id} }).afterClosed()
+    this.dialog.open(AddDailyComponent, { data: {sprintId: this.sprint.id} }).afterClosed()
     .subscribe(result => {
       this.ngOnInit()
     });
@@ -52,12 +46,10 @@ export class DailyComponent implements OnInit {
   edit(meet: any) {
     this.dialog.open(EditDailyComponent, { 
       data: {
-        planningId: this.planning.id, 
+        id: meet.id, 
         sprintId: this.sprint.id, 
-        subject: meet.subject,
-        activity: meet.activity,
-        user_story_id: meet.user_story_id,
-        assigned: meet.assigned,
+        date: meet.subject,
+        report: meet.report,
       } }).afterClosed()
     .subscribe(result => {
       this.ngOnInit()
@@ -65,8 +57,11 @@ export class DailyComponent implements OnInit {
   }
 
   delete(meet: any) {
-
+    this.meetingService.deleteDailies(meet.id);
+    this.ngOnInit()
+    this.cdr.detectChanges();
   }
+
 
   searchMeet() {
     if (this.search != "") {

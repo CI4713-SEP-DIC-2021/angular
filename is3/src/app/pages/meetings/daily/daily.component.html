@@ -21,30 +21,19 @@
       <!-- Table of projects -->
       <table mat-table [dataSource]="meetList" class="mat-elevation-z8" style="width: 100%;">
       
-        <!-- ID Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> Id. </th>
           <td mat-cell *matCellDef="let element"> {{element.id}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="subject">
-            <th mat-header-cell *matHeaderCellDef> Tema </th>
-            <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
         </ng-container>
       
-        <ng-container matColumnDef="user_story_id">
-          <th mat-header-cell *matHeaderCellDef> HU </th>
-          <td mat-cell *matCellDef="let element"> {{element.user_story_id}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="activity">
-            <th mat-header-cell *matHeaderCellDef> Actividad </th>
-            <td mat-cell *matCellDef="let element"> {{element.activity}} </td>
-        </ng-container>
-      
-        <ng-container matColumnDef="assigned">
-            <th mat-header-cell *matHeaderCellDef> Asignado </th>
-            <td mat-cell *matCellDef="let element"> {{element.assigned}} </td>
+        <ng-container matColumnDef="report">
+          <th mat-header-cell *matHeaderCellDef> Reporte </th>
+          <td mat-cell *matCellDef="let element"> {{element.report}} </td>
         </ng-container>
 
         <!-- Actions Column -->

@@ -132,7 +132,7 @@ export class MeetingService {
   }
 
   getAllRetrospectiveBySprint(sprintId: any) {
-    return this.http.get(`${this.url}/meetings/retrospectives//${sprintId}`)
+    return this.http.get(`${this.url}/meetings/retrospectives/${sprintId}`)
     .toPromise()
     .then(
       (response) => {
@@ -197,6 +197,85 @@ export class MeetingService {
     });
 
     return this.http.delete(`${this.url}/meetings/retrospectives/delete/${retrospectiveId}`, {headers})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        // Devuelvo null
+        console.log(error);
+      }
+    ); 
+  }
+
+  getAllDailiesBySprint(sprintId: any) {
+    return this.http.get(`${this.url}/meetings/dailies/${sprintId}`)
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response)
+        return response;
+    },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  createDailies(dailies: any, sprintId: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      token: '?'
+    });
+
+    return this.http.post(`${this.url}/meetings/dailies/add`, dailies, {headers})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        // Devuelvo null
+        console.log(error);
+      }
+    ); 
+  }
+
+  updateDailies(dailies: any, dailiesId: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      token: '?'
+    });
+
+    console.log(dailies)
+
+    return this.http.put(`${this.url}/meetings/dailies/${dailiesId}`, dailies, {headers})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        // Devuelvo null
+        console.log(error);
+      }
+    ); 
+  }
+
+  deleteDailies(dailiesId: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      token: '?'
+    });
+
+    return this.http.delete(`${this.url}/meetings/dailies/delete/${dailiesId}`, {headers})
     .toPromise()
     .then(
       (response) => {

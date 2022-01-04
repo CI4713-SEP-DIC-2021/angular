@@ -1,1 +1,27 @@
-<p>edit-daily works!</p>
+<!-- Add project dialog -->
+<div style="width: 500px">
+    <h2 mat-dialog-title>Editar reunión técnica diaria</h2>
+    <mat-divider></mat-divider>
+
+    <!-- Form -->
+    <mat-dialog-content>
+        <form [formGroup]="planningForm">
+            <!-- Project description -->
+            <input matInput formControlName="date" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Reporte</mat-label>
+                <input formControlName="report" placeholder="Introduce la descripción del proyecto" matInput>
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+
+    <!-- Add button -->
+    <mat-dialog-actions style="justify-content: center">
+        <button [disabled]="planningForm.invalid" mat-button class="add-button" (click)="addRetrospective()">
+            Agregar
+        </button>
+    </mat-dialog-actions>
+</div>
