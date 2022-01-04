@@ -17,7 +17,7 @@
       </button>
     </div>
 
-    <div class="example-table-container" *ngIf="meetList.length > 0" >
+    <div class="example-table-container" *ngIf="meetList && meetList.length > 0" >
       <!-- Table of projects -->
       <table mat-table [dataSource]="meetList" class="mat-elevation-z8" style="width: 100%;">
       

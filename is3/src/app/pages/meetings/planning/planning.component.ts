@@ -59,6 +59,7 @@ export class PlanningComponent implements OnInit {
         activity: meet.activity,
         user_story_id: meet.user_story_id,
         assigned: meet.assigned,
+        id: meet.id
       } }).afterClosed()
     .subscribe(result => {
       this.ngOnInit()

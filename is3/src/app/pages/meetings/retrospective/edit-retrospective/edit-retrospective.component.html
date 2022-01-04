@@ -1,0 +1,43 @@
+<p>edit-retrospective works!</p>
+<!-- Add project dialog -->
+<div style="width: 500px">
+    <h2 mat-dialog-title>Nuevo Proyecto</h2>
+    <mat-divider></mat-divider>
+
+    <!-- Form -->
+    <mat-dialog-content>
+        <form [formGroup]="planningForm">
+            <!-- Project description -->
+            <input matInput formControlName="date" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Método</mat-label>
+                <input formControlName="method" placeholder="Introduce la descripción del proyecto" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Positivo</mat-label>
+                <input formControlName="positive" placeholder="Introduce la descripción del proyecto" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Negativo</mat-label>
+                <input formControlName="negative" placeholder="Introduce la descripción del proyecto" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Decisión</mat-label>
+                <input formControlName="decision" placeholder="Introduce la descripción del proyecto" matInput>
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+
+    <!-- Add button -->
+    <mat-dialog-actions style="justify-content: center">
+        <button [disabled]="planningForm.invalid" mat-button class="add-button" (click)="addRetrospective()">
+            Agregar
+        </button>
+    </mat-dialog-actions>
+</div>

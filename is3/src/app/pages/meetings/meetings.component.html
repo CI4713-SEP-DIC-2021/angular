@@ -6,11 +6,11 @@
   </ng-container>
   
   <ng-container *ngIf="meetingType === 'daily' && sprint">
-    <app-daily></app-daily>
+    <app-daily [sprint]="sprint" ></app-daily>
   </ng-container>
 
   <ng-container *ngIf="meetingType === 'retrospective' && sprint">
-    <app-retrospective></app-retrospective>
+    <app-retrospective [sprint]="sprint"></app-retrospective>
   </ng-container>
     
   <app-footer></app-footer>

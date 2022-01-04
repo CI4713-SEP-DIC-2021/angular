@@ -87,14 +87,16 @@ export class MeetingService {
     ); 
   }
 
-  updatePlanningResult(planning: any) {
+  updatePlanningResult(planning: any, planningId: any) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
       token: '?'
     });
 
-    return this.http.put(`${this.url}/meetings/planning/results/${planning.id}`, planning, {headers})
+    console.log(planning)
+
+    return this.http.put(`${this.url}/meetings/planning/results/${planningId}`, planning, {headers})
     .toPromise()
     .then(
       (response) => {
@@ -116,6 +118,85 @@ export class MeetingService {
     });
 
     return this.http.delete(`${this.url}/meetings/planning/results/delete/${planning.id}`, {headers})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        // Devuelvo null
+        console.log(error);
+      }
+    ); 
+  }
+
+  getAllRetrospectiveBySprint(sprintId: any) {
+    return this.http.get(`${this.url}/meetings/retrospectives//${sprintId}`)
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response)
+        return response;
+    },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  createRetrospective(retrospective: any, sprintId: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      token: '?'
+    });
+
+    return this.http.post(`${this.url}/meetings/retrospectives/add`, retrospective, {headers})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        // Devuelvo null
+        console.log(error);
+      }
+    ); 
+  }
+
+  updateRetrospective(retrospective: any, retrospectiveId: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      token: '?'
+    });
+
+    console.log(retrospective)
+
+    return this.http.put(`${this.url}/meetings/retrospectives/${retrospectiveId}`, retrospective, {headers})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        // Devuelvo null
+        console.log(error);
+      }
+    ); 
+  }
+
+  deleteRetrospective(retrospectiveId: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      token: '?'
+    });
+
+    return this.http.delete(`${this.url}/meetings/retrospectives/delete/${retrospectiveId}`, {headers})
     .toPromise()
     .then(
       (response) => {

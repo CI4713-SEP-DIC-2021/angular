@@ -26,6 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 // Components
 import { ProjectsComponent } from './pages/projects/projects.component';
@@ -64,6 +66,11 @@ import { DailyComponent } from './pages/meetings/daily/daily.component';
 import { RetrospectiveComponent } from './pages/meetings/retrospective/retrospective.component';
 import { AddPlanningComponent } from './pages/meetings/planning/add-planning/add-planning.component';
 import { EditPlanningComponent } from './pages/meetings/planning/edit-planning/edit-planning.component';
+import { AddDailyComponent } from './pages/meetings/daily/add-daily/add-daily.component';
+import { EditDailyComponent } from './pages/meetings/daily/edit-daily/edit-daily.component';
+import { AddRetrospectiveComponent } from './pages/meetings/retrospective/add-retrospective/add-retrospective.component';
+import { EditRetrospectiveComponent } from './pages/meetings/retrospective/edit-retrospective/edit-retrospective.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -107,6 +114,10 @@ import { EditPlanningComponent } from './pages/meetings/planning/edit-planning/e
     RetrospectiveComponent,
     AddPlanningComponent,
     EditPlanningComponent,
+    AddDailyComponent,
+    EditDailyComponent,
+    AddRetrospectiveComponent,
+    EditRetrospectiveComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -133,6 +144,8 @@ import { EditPlanningComponent } from './pages/meetings/planning/edit-planning/e
     MatButtonModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     UserProfileModule,
     MatDialogModule,
   ],
@@ -144,6 +157,9 @@ import { EditPlanningComponent } from './pages/meetings/planning/edit-planning/e
       provide: MatDialogRef,
       useValue: {}
     },
+    MatDatepickerModule,
+    MatNativeDateModule,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

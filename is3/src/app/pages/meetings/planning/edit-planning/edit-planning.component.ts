@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MeetingService } from 'src/app/services/meeting.service';
 import { SprintsService } from 'src/app/services/sprints.service';
@@ -16,6 +16,8 @@ export class EditPlanningComponent implements OnInit {
   token!: any;
   usersList: any;
   storiesList: any;
+
+  planningForm!: FormGroup
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,20 +39,25 @@ export class EditPlanningComponent implements OnInit {
       if (stories) { 
         this.storiesList = stories;
       }
-    });
-  }
+    })
 
-  planningForm = this.formBuilder.group({
+
+  this.planningForm = this.formBuilder.group({
     subject: [this.data.subject, Validators.required],
     activity: [this.data.activity, Validators.required],
     user_story_id: [this.data.user_story_id, Validators.required],
     assigned: [this.data.assigned, Validators.required]
   })
 
+
+  this.planningForm.get('user_story_id')?.setValue(this.data.user_story_id);
+  this.planningForm.get('assigned')?.setValue(this.data.assigned);
+  }
+
   editPlanning() {
     console.log(this.planningForm.value);
     
-    this.meetingService.addPlanningResult(this.planningForm.value, this.data?.planningId);
+    this.meetingService.updatePlanningResult(this.planningForm.value, this.data.id);
     this.dialogRef.close();
   }
 }
