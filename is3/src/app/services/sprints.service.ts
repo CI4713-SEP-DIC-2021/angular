@@ -272,4 +272,203 @@ export class SprintsService {
   }
   
 
+  // SPRINT
+
+  /**
+   * getSprint
+   * Gets the information of a given sprint
+   * @param sprintId ID of the sprint
+   * @returns response of the operation
+   */
+  getSprint(sprintId: any) {
+    return this.http.get(`${this.url}/sprint/${sprintId}`)
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response)
+        return response;
+    },
+      (error) => {
+        console.log(error);
+        return [];
+      }
+    );
+  }
+
+  /**
+   * addSprint
+   * Creates a new sprint
+   */
+  addSprint(description: any, project_id: number, end_date: any, user_id: number) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      token: '?'
+    });
+
+    let sprint = {description: description, project_id: project_id, end_date: end_date, user_id: user_id}
+
+    return this.http.post(`${this.url}/sprint/add`, sprint, {headers})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        // Devuelvo null
+        console.log(error);
+      }
+    ); 
+  }
+
+
+  // TASKS
+
+  /**
+   * getTasksBySprint
+   * Gets the tasks associated with a given sprint
+   * @param sprintId ID of the user story associated with the tasks
+   * @returns response of the operation
+   */
+  getTasksBySprint(sprintId: any) {
+    return this.http.get(`${this.url}/tasks/getbysprint/${sprintId}`)
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response)
+        return response;
+    },
+      (error) => {
+        console.log(error);
+        return [];
+      }
+    );
+  }
+
+
+  /**
+   * getTasksByStory
+   * Gets the tasks associated with a given user story
+   * @param storyId ID of the user story associated with the tasks
+   * @returns response of the operation
+   */
+  getTasksByStory(storyId: any) {
+    return this.http.get(`${this.url}/tasks/getbystory/${storyId}`)
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response)
+        return response;
+    },
+      (error) => {
+        console.log(error);
+        return [];
+      }
+    );
+  }
+
+
+
+  /**
+   * addTask
+   * Adds a new task to a user story
+   */
+  addTask(taskForm: any, story_id: number, sprint_id: number, user_id: number) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      token: '?'
+    });
+
+    let users = [];
+    if (taskForm.user1 === taskForm.user2) {
+      users = [taskForm.user1]
+    } else if (!taskForm.user1) {
+      users = [taskForm.user2]
+    } else if (!taskForm.user2) {
+      users = [taskForm.user1]
+    } else {
+      users = [taskForm.user1, taskForm.user2]
+    }
+
+    let task = {description: taskForm.description, task_type: taskForm.task_type, task_status: taskForm.task_status, users: users,
+                task_class: taskForm.task_class, functions: taskForm.functions, story_id: story_id, sprint_id: sprint_id, user_id: user_id}
+
+    return this.http.post(`${this.url}/tasks/add`, task, {headers})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        // Devuelvo null
+        console.log(error);
+      }
+    ); 
+  }
+
+
+  /**
+   * deleteTask
+   * Deletes a given task
+   * @param taskId ID of the task to be deleted
+   * @returns response of the operation
+   */
+  deleteTask(taskId: any) {
+    return this.http.delete(`${this.url}/tasks/delete/${taskId}`)
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        // Devuelvo null
+        console.log(error);
+      }
+    );
+  }
+
+
+  /**
+   * updateTask
+   * Updates the information of a given task
+   */
+  updateTask(taskForm: any, taskId: number) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      token: '?'
+    });
+
+    let users = [];
+    if (taskForm.user1 === taskForm.user2) {
+      users = [taskForm.user1]
+    } else if (!taskForm.user1) {
+      users = [taskForm.user2]
+    } else if (!taskForm.user2) {
+      users = [taskForm.user1]
+    } else {
+      users = [taskForm.user1, taskForm.user2]
+    }
+
+    let task = {description: taskForm.description, task_type: taskForm.task_type, task_status: taskForm.task_status, users: users,
+      task_class: taskForm.task_class, functions: taskForm.functions}
+    
+    return this.http.put(`${this.url}/tasks/update/${taskId}`, task, {headers})
+    .toPromise()
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+ 
+
 }

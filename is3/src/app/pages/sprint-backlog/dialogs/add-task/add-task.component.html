@@ -1,0 +1,87 @@
+<!-- Add new task dialog -->
+<div style="width: 500px">
+    <h2 mat-dialog-title>Agregar tarea</h2>
+    <mat-divider></mat-divider>
+
+    <!-- Form -->
+    <mat-dialog-content>
+        <form [formGroup]="tasksForm">
+            <!-- Description -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Tarea</mat-label>
+                <input formControlName="description" placeholder="Introduce la tarea" matInput>
+            </mat-form-field>
+
+
+            <!-- Type -->
+            <mat-form-field appearance="outline" class="form-description">
+                <mat-label>Tipo</mat-label>
+                <mat-select formControlName="task_type">
+                  <mat-option value="develop">Desarrollo</mat-option>
+                  <mat-option value="design">Diseño</mat-option>
+                  <mat-option value="fix">Reparar</mat-option>
+                  <mat-option value="refact">Refactor</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+            <!-- Status -->
+            <mat-form-field appearance="outline" class="form-description">
+                <mat-label>Estado</mat-label>
+                <mat-select formControlName="task_status">
+                  <mat-option value="new">Nueva</mat-option>
+                  <mat-option value="init">Iniciada</mat-option>
+                  <mat-option value="to_test">Lista para Pruebas</mat-option>
+                  <mat-option value="ended">Culminada</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+            <!-- Username of the user -->
+            <div style="display: flex">
+                <mat-form-field appearance="outline" class="form-description" style="width: 35%; margin-right: 20px">
+                    <mat-label>Asignada</mat-label>
+                    <mat-select name="users" formControlName="user1">
+                        <mat-option *ngFor="let user of usersList" [value]="user.id">
+                            {{user.username}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline" class="form-description" style="width: 35%; margin-left: 20px">
+                    <mat-label>Asignada</mat-label>
+                    <mat-select formControlName="user2">
+                        <mat-option *ngFor="let user of usersList" [value]="user.id">
+                            {{user.username}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <!-- Class -->
+            <mat-form-field appearance="outline" class="form-description">
+                <mat-label>Clase</mat-label>
+                <mat-select formControlName="task_class">
+                  <mat-option value="easy">Sencilla</mat-option>
+                  <mat-option value="middle">Media</mat-option>
+                  <mat-option value="hard">Compleja</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Functions -->
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="form-description">
+                <mat-label>Funciones</mat-label>
+                <input formControlName="functions" type="number" placeholder="Introduce las funciones" matInput>
+            </mat-form-field>
+
+
+        </form>
+    </mat-dialog-content>
+
+    <!-- Add button -->
+    <mat-dialog-actions style="justify-content: center">
+        <button mat-button class="add-button" (click)="addTask()">
+            Agregar
+        </button>
+    </mat-dialog-actions>
+</div>

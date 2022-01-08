@@ -6,10 +6,13 @@ import { SprintsService } from 'src/app/services/sprints.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 import { UserStoriesService } from 'src/app/services/user-stories.service';
 import { AddCriteriaComponent } from './dialogs/add-criteria/add-criteria.component';
+import { AddTaskComponent } from './dialogs/add-task/add-task.component';
 import { AddTestComponent } from './dialogs/add-test/add-test.component';
 import { DeleteCriteriaComponent } from './dialogs/delete-criteria/delete-criteria.component';
+import { DeleteTaskComponent } from './dialogs/delete-task/delete-task.component';
 import { DeleteTestComponent } from './dialogs/delete-test/delete-test.component';
 import { EditCriteriaComponent } from './dialogs/edit-criteria/edit-criteria.component';
+import { EditTaskComponent } from './dialogs/edit-task/edit-task.component';
 import { EditTestComponent } from './dialogs/edit-test/edit-test.component';
 
 @Component({
@@ -33,6 +36,17 @@ export class SprintBacklogComponent implements OnInit {
   current_user_id: any;
   current_user_role: any;
   token: any;
+
+  // Tasks
+  tasksList:any[] = [];
+  auxListTasks: any = [];
+
+  // Sprint
+  currentSprint: any;
+  sprint_init_date: any;
+  sprint_duration: any;
+  sprint_end_date: any;
+  sprint_est_time: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -64,11 +78,21 @@ export class SprintBacklogComponent implements OnInit {
       }
     );
 
+    // Get current sprint (id 1)
+    this.sprintService.getSprint(1).then((sprint: any) => {
+      this.currentSprint = sprint;
+      
+      this.sprint_init_date = this.formatDate(this.currentSprint[0].init_date);
+      this.sprint_end_date = this.formatDate(this.currentSprint[0].end_date);
+      this.sprint_duration = this.currentSprint[0].duration;
+      this.sprint_est_time = this.currentSprint[0].est_time;
+    });
   }
 
   displayedColumnsStories: string[] = ['id', 'description', 'epica', 'priority', 'add'];
   displayedColumnsCriteria: string[] = ['id', 'description', 'approved', 'actions'];
   displayedColumnsTests: string[] = ['id', 'description', 'approved', 'actions'];
+  displayedColumnsTasks: string[] = ['id', 'description', 'type', 'status', 'users', 'class', 'functions', 'actions'];
 
 
   /**
@@ -93,7 +117,60 @@ export class SprintBacklogComponent implements OnInit {
 
     this.getCriteriaList();
     this.getTestsList();
+
+    // Tasks
+    this.getTasksList();
   }
+
+
+
+
+
+
+
+  /**
+   * getTasksList
+   * Gets all of the tasks of the sprint
+   */
+  async getTasksList() {
+
+    // Get the tasks of each user story
+    for (let i of this.storiesList) {
+      let story = i;
+
+      await this.sprintService.getTasksByStory(story.id).then((tasks: any) => {
+        var response_array = Array.isArray(tasks);
+
+        if (response_array) {
+          for (let x of tasks) {
+            let element = x;
+            this.auxListTasks.push(element);
+          }
+        }
+      })
+    }
+    
+
+    /**
+    await this.sprintService.getTasksBySprint(1).then((tasks: any) => {
+      var response_array = Array.isArray(tasks);
+
+      if (response_array) {
+        this.auxListTasks = tasks;
+      }
+    })
+    */
+
+    this.tasksList = this.auxListTasks;
+    this.auxListTasks = [];
+  }
+
+
+
+
+
+
+
 
   /**
    * getCriteriaList
@@ -267,6 +344,90 @@ export class SprintBacklogComponent implements OnInit {
     .subscribe(result => {
       this.ngOnInit()
     });
+  }
+
+
+
+
+
+  /////// Tasks
+
+  /**
+   * addTaskDialog
+   * Opens a dialog to add a new task
+   * @param storyId ID of the user story associated with the new task
+   */
+  addTaskDialog(storyId: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { storyId: storyId }
+
+    this.dialog.open(AddTaskComponent, dialogConfig).afterClosed()
+    .subscribe(result => {
+      this.ngOnInit()
+    });
+  }
+
+  /**
+   * getUserString
+   * Returns a string with the users assigned to a task
+   * @param users Users assigned to a task
+   * @returns A string with the usernames of the users assigned to a task
+   */
+  getUserString(users: any) {
+    let users_string: string = "";
+
+    for (let i of users) {
+      if (users_string.length > 0) {
+        users_string = users_string + ", "
+      }
+      users_string = users_string + i.username
+    }
+
+    return users_string
+  }
+
+
+  /**
+   * deleteTaskDialog
+   * Opens the dialog to delete a task
+   * @param taskId ID of the task to be deleted
+   */
+  deleteTaskDialog(taskId: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { taskId: taskId }
+
+    this.dialog.open(DeleteTaskComponent, dialogConfig).afterClosed()
+    .subscribe(result => {
+      this.ngOnInit()
+    });
+  }
+
+  /**
+   * editTaskDialog
+   * Opens a dialog to edit the information of a given task
+   * @param task Information of the task to be edited
+   */
+  editTaskDialog(task: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { task: task }
+
+    this.dialog.open(EditTaskComponent, dialogConfig).afterClosed()
+    .subscribe(result => {
+      this.ngOnInit()
+    });
+  }
+
+  /**
+   * formatDate
+   * Returns the given date in the format DD/MM/YYYY
+   */
+  formatDate (date: any) {
+    let day = new Date(date).getDate() + 1;
+    let month = new Date(date).getMonth() + 1;
+    let year = new Date(date).getFullYear();
+
+    let date_string = day + "/" + month + "/" + year;
+    return date_string;
   }
 
 }

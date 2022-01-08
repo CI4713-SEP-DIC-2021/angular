@@ -71,6 +71,9 @@ import { EditDailyComponent } from './pages/meetings/daily/edit-daily/edit-daily
 import { AddRetrospectiveComponent } from './pages/meetings/retrospective/add-retrospective/add-retrospective.component';
 import { EditRetrospectiveComponent } from './pages/meetings/retrospective/edit-retrospective/edit-retrospective.component';
 import { DatePipe } from '@angular/common';
+import { AddTaskComponent } from './pages/sprint-backlog/dialogs/add-task/add-task.component';
+import { DeleteTaskComponent } from './pages/sprint-backlog/dialogs/delete-task/delete-task.component';
+import { EditTaskComponent } from './pages/sprint-backlog/dialogs/edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +121,9 @@ import { DatePipe } from '@angular/common';
     EditDailyComponent,
     AddRetrospectiveComponent,
     EditRetrospectiveComponent,
+    AddTaskComponent,
+    DeleteTaskComponent,
+    EditTaskComponent,
   ],
   imports: [
     BrowserAnimationsModule,
